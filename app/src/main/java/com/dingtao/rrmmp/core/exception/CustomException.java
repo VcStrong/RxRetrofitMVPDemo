@@ -37,7 +37,7 @@ public class CustomException {
         if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {
-            //解析错误
+            //解析错 误
             ex = new ApiException(PARSE_ERROR, e.getMessage());
             return ex;
         } else if (e instanceof ConnectException) {

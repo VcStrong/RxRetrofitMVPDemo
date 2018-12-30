@@ -36,7 +36,7 @@ public class ResponseTransformer {
     }
 
     /**
-     * 服务其返回的数据解析
+     * 服务其返回的数据解 析
      * 正常服务器返回数据和服务器可能返回的exception
      *
      * @param <T>
