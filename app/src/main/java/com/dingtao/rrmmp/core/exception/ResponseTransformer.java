@@ -8,11 +8,11 @@ import retrofit2.Response;
 
 public class ResponseTransformer {
 
-    public static <T> ObservableTransformer<Response<T>, T> handleResult() {
+    public static <T> ObservableTransformer<T, T> handleResult() {
 
-        return  new ObservableTransformer<Response<T>, T>() {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public ObservableSource<T> apply(Observable<Response<T>> upstream) {
+            public ObservableSource<T> apply(Observable<T> upstream) {
 
                 return upstream
                         .onErrorResumeNext(new ErrorResumeFunction<T>())
@@ -27,31 +27,25 @@ public class ResponseTransformer {
      *
      * @param <T>
      */
-    private static class ErrorResumeFunction<T> implements Function<Throwable, ObservableSource<? extends Response<T>>> {
+    private static class ErrorResumeFunction<T> implements Function<Throwable, ObservableSource<T>> {
 
         @Override
-        public ObservableSource<? extends Response<T>> apply(Throwable throwable) throws Exception {
+        public ObservableSource<T> apply(Throwable throwable) throws Exception {
             return Observable.error(throwable);
         }
     }
 
     /**
-     * 服务其返回的数据解 析
+     * 服务其返回的数据解析
      * 正常服务器返回数据和服务器可能返回的exception
      *
      * @param <T>
      */
-    private static class ResponseFunction<T> implements Function<Response<T>, ObservableSource<T>> {
+    private static class ResponseFunction<T> implements Function<T, ObservableSource<T>> {
 
         @Override
-        public ObservableSource<T> apply(Response<T> tResponse) throws Exception {
-            int code = tResponse.code();
-            String message = tResponse.message();
-            if (code == 200) {
-                return Observable.just(tResponse.body());
-            } else {
-                return Observable.error(new ApiException(code, message));
-            }
+        public ObservableSource<T> apply(T tResponse) throws Exception {
+            return Observable.just(tResponse);
         }
     }
 }
