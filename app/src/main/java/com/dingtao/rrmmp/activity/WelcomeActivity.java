@@ -9,6 +9,7 @@ import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.core.WDActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author dingtao
@@ -44,6 +45,16 @@ public class WelcomeActivity extends WDActivity {
     protected void initView() {
         seekText.setText("跳过"+count+"s");
         handler.sendEmptyMessageDelayed(1,1000);
+    }
+
+    @OnClick(R.id.seek_text)
+    public void seek(){
+        handler.removeMessages(1);
+        if (LOGIN_USER!=null){
+            intent(MainActivity.class);
+        }else{
+            intent(LoginActivity.class);
+        }
     }
 
     @Override
