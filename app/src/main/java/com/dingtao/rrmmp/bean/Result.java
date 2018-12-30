@@ -6,31 +6,40 @@ package com.dingtao.rrmmp.bean;
  * qq:1940870847
  */
 public class Result<T> {
-    String code;
-    String msg;
-    T data;
+    String status;
+    String message;
+    T result;
+    String headPath;
 
-    public String getCode() {
-        return code;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public T getData() {
-        return data;
+    public T getResult() {
+        return result;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setResult(T result) {
+        this.result = result;
+    }
+
+    public String getHeadPath() {
+        return headPath;
+    }
+
+    public void setHeadPath(String headPath) {
+        this.headPath = headPath;
     }
 }

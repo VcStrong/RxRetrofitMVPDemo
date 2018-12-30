@@ -1,15 +1,11 @@
-package com.dingtao.rrmmp.http;
+package com.dingtao.rrmmp.core.http;
 
 import com.dingtao.rrmmp.bean.Result;
-
-import java.io.File;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 /**
  * @author dingtao
@@ -19,7 +15,10 @@ import retrofit2.http.Part;
 public interface IRequest {
 
     @FormUrlEncoded
-    @POST("user/reg")
-    Observable<Result> register(@Field("mobile") String m, @Field("password") String p);
+    @POST("user/v1/register")
+    Observable<Result> register(@Field("phone") String m, @Field("pwd") String p);
 
+    @FormUrlEncoded
+    @POST("user/v1/login")
+    Observable<Result> login(@Field("phone") String m, @Field("pwd") String p);
 }

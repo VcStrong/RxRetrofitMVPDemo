@@ -12,16 +12,16 @@ import io.reactivex.functions.Consumer;
  * @date 2018/12/28 11:23
  * qq:1940870847
  */
-public class RequestPresenter extends BasePresenter {
+public class LoginPresenter extends BasePresenter {
 
-    public RequestPresenter(DataCall consumer) {
-        super(consumer);
+    public LoginPresenter(DataCall dataCall) {
+        super(dataCall);
     }
 
     @Override
     protected Observable observable(Object... args) {
         IRequest iRequest = NetworkManager.instance().create(IRequest.class);
-        return iRequest.register((String)args[0],(String)args[1]);
+        return iRequest.login((String)args[0],(String)args[1]);
     }
 
 

@@ -1,20 +1,16 @@
-package com.dingtao.rrmmp;
+package com.dingtao.rrmmp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
+import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.http.IRequest;
-import com.dingtao.rrmmp.http.NetworkManager;
 import com.dingtao.rrmmp.presenter.RequestPresenter;
+import com.dingtao.rrmmp.util.UIUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        requestPresenter = new RequestPresenter(new RegisterCall());
+//        requestPresenter = new RequestPresenter(new RegisterCall());
     }
 
     @OnClick(R.id.register_btn)
@@ -39,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
      */
     class RegisterCall implements Consumer<Result> {
         @Override
-        public void accept(Result result) throws Exception {
-            Toast.makeText(getBaseContext(),result.getCode()+"   "+result.getMsg(),Toast.LENGTH_LONG).show();
+        public void accept(Result result){
+            UIUtils.showToastSafe(result.getStatus()+"   "+result.getMessage());
         }
     }
 }

@@ -1,6 +1,5 @@
-package com.dingtao.rrmmp.http;
+package com.dingtao.rrmmp.core.http;
 
-import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -31,17 +30,19 @@ public class NetworkManager {
     }
 
     private void init(){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//打印请求参数，请求结果
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor())
-                .connectTimeout(60,TimeUnit.SECONDS)
+                .addInterceptor(interceptor)
+                .connectTimeout(10,TimeUnit.SECONDS)
                 .writeTimeout(10,TimeUnit.SECONDS)
                 .readTimeout(10,TimeUnit.SECONDS)
                 .build();
 
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://www.zhaoapi.cn/")//base_url:http+域名
+                .baseUrl("http://172.17.8.100/small/")//base_url:http+域名
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用Rxjava对回调数据进行处理
                 .addConverterFactory(GsonConverterFactory.create())//响应结果的解析器，包含gson，xml，protobuf
                 .build();
