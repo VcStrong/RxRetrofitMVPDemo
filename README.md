@@ -3,4 +3,7 @@
 mvp乞丐版已知bug：请求异常会崩溃
 
 #### 2.mvp-V2
-处理异常，修改回调接口，页面完善。
+MVP-V2.0
+增加MD5,工具类，Activity和Application基类
+封装retrofit异常
+修改回调接口
