@@ -15,7 +15,7 @@ import com.dingtao.rrmmp.bean.UserInfo;
 /** 
  * DAO for table "USER_INFO".
 */
-public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
+public class UserInfoDao extends AbstractDao<UserInfo, Long> {
 
     public static final String TABLENAME = "USER_INFO";
 
@@ -24,7 +24,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property UserId = new Property(0, int.class, "userId", true, "USER_ID");
+        public final static Property UserId = new Property(0, long.class, "userId", true, "_id");
         public final static Property HeadPic = new Property(1, String.class, "headPic", false, "HEAD_PIC");
         public final static Property NickName = new Property(2, String.class, "nickName", false, "NICK_NAME");
         public final static Property Phone = new Property(3, String.class, "phone", false, "PHONE");
@@ -46,7 +46,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER_INFO\" (" + //
-                "\"USER_ID\" INTEGER PRIMARY KEY NOT NULL ," + // 0: userId
+                "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 0: userId
                 "\"HEAD_PIC\" TEXT," + // 1: headPic
                 "\"NICK_NAME\" TEXT," + // 2: nickName
                 "\"PHONE\" TEXT," + // 3: phone
@@ -118,14 +118,14 @@ public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
     }
 
     @Override
-    public Integer readKey(Cursor cursor, int offset) {
-        return cursor.getInt(offset + 0);
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.getLong(offset + 0);
     }    
 
     @Override
     public UserInfo readEntity(Cursor cursor, int offset) {
         UserInfo entity = new UserInfo( //
-            cursor.getInt(offset + 0), // userId
+            cursor.getLong(offset + 0), // userId
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // headPic
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // nickName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // phone
@@ -138,7 +138,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
      
     @Override
     public void readEntity(Cursor cursor, UserInfo entity, int offset) {
-        entity.setUserId(cursor.getInt(offset + 0));
+        entity.setUserId(cursor.getLong(offset + 0));
         entity.setHeadPic(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setNickName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setPhone(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
@@ -148,12 +148,13 @@ public class UserInfoDao extends AbstractDao<UserInfo, Integer> {
      }
     
     @Override
-    protected final Integer updateKeyAfterInsert(UserInfo entity, long rowId) {
-        return entity.getUserId();
+    protected final Long updateKeyAfterInsert(UserInfo entity, long rowId) {
+        entity.setUserId(rowId);
+        return rowId;
     }
     
     @Override
-    public Integer getKey(UserInfo entity) {
+    public Long getKey(UserInfo entity) {
         if(entity != null) {
             return entity.getUserId();
         } else {

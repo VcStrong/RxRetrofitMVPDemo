@@ -55,18 +55,19 @@ public abstract class WDActivity extends AppCompatActivity {
         LogUtils.e("getTaskId = " + getTaskId());
         initLoad();
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        ButterKnife.bind(this);//绑定布局
         initView();
     }
-
-    protected abstract void initView();
-
     /**
      * 设置layoutId
-     *
      * @return
      */
     protected abstract int getLayoutId();
+
+    /**
+     * 初始化视图
+     */
+    protected abstract void initView();
 
     /**
      * 清除数据

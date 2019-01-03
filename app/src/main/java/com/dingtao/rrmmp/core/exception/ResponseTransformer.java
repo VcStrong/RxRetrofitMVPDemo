@@ -8,6 +8,11 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Function;
 import retrofit2.Response;
 
+/**
+ * @author dingtao
+ * @date 2019/1/2 7:11 PM
+ * 封装了Retrofit+rxjava代码报错封装
+ */
 public class ResponseTransformer {
 
     public static <T> ObservableTransformer<T, T> handleResult() {

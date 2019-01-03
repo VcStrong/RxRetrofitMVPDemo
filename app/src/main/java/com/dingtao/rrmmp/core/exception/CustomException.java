@@ -10,6 +10,11 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+/**
+ * @author dingtao
+ * @date 2019/1/2 7:03 PM
+ * 异常处理工具类：你把异常传给我，哪些异常需要页面Toast提示或者操作
+ */
 public class CustomException {
 
     /**
@@ -32,21 +37,23 @@ public class CustomException {
      */
     public static final int HTTP_ERROR = 1003;
 
+    /**
+     * 处理系统异常，封装成ApiException
+     * Throwable包含Error和Exception
+     */
     public static ApiException handleException(Throwable e) {
-        e.printStackTrace();
+
+        e.printStackTrace();//打印异常
+
         ApiException ex;
         if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {
             //解析错误
-            ex = new ApiException(PARSE_ERROR, e.getMessage());
+            ex = new ApiException(PARSE_ERROR, "解析异常");
             return ex;
-        } else if (e instanceof ConnectException) {
+        } else if (e instanceof ConnectException  || e instanceof UnknownHostException || e instanceof SocketTimeoutException) {
             //网络错误
-            ex = new ApiException(NETWORK_ERROR, e.getMessage());
-            return ex;
-        } else if (e instanceof UnknownHostException || e instanceof SocketTimeoutException) {
-            //连接错误
             ex = new ApiException(NETWORK_ERROR, e.getMessage());
             return ex;
         } else {

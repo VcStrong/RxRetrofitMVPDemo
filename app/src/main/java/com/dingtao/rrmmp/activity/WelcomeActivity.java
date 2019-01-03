@@ -30,9 +30,9 @@ public class WelcomeActivity extends WDActivity {
             seekText.setText("跳过"+count+"s");
             if (count==0){
                 if (LOGIN_USER!=null){
-                    intent(MainActivity.class);
+                    intent(MainActivity.class);//跳转到主页面
                 }else{
-                    intent(LoginActivity.class);
+                    intent(LoginActivity.class);//跳转到登录页
                 }
                 finish();
             }else{//消息不能复用，必须新建
@@ -55,6 +55,7 @@ public class WelcomeActivity extends WDActivity {
         }else{
             intent(LoginActivity.class);
         }
+        finish();
     }
 
     @Override

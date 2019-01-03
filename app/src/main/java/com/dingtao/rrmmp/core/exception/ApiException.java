@@ -1,8 +1,13 @@
 package com.dingtao.rrmmp.core.exception;
 
+/**
+ * @author dingtao
+ * @date 2019/1/2 7:01 PM
+ * 封装了自定义的异常，页面拿着我的异常做出友好提示
+ */
 public class ApiException extends Exception {
-    private int code;
-    private String displayMessage;
+    private int code;//
+    private String displayMessage;//提示的消息
 
     public ApiException(int code, String displayMessage) {
         this.code = code;

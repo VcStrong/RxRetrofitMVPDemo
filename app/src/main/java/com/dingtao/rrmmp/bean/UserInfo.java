@@ -12,7 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class UserInfo {
     @Id
-    int userId;
+    long userId;
     String headPic;
     String nickName;
     String phone;
@@ -21,8 +21,8 @@ public class UserInfo {
 
     int status;//记录本地用户登录状态，用于直接登录和退出,1:登录，0：未登录或退出
 
-    @Generated(hash = 1216521541)
-    public UserInfo(int userId, String headPic, String nickName, String phone,
+    @Generated(hash = 836882664)
+    public UserInfo(long userId, String headPic, String nickName, String phone,
             String sessionId, int sex, int status) {
         this.userId = userId;
         this.headPic = headPic;
@@ -37,11 +37,11 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return this.userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

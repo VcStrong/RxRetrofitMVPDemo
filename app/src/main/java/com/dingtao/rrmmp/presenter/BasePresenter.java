@@ -30,7 +30,7 @@ public abstract class BasePresenter {
 
     public void reqeust(Object... args) {
         observable(args)
-                .compose(ResponseTransformer.handleResult())
+                .compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
                 .compose(new ObservableTransformer() {
                     @Override
                     public ObservableSource apply(Observable upstream) {
@@ -50,6 +50,7 @@ public abstract class BasePresenter {
                     public void accept(Throwable throwable) throws Exception {
                         // 处理异常
 //                        UIUtils.showToastSafe("请求失败");
+                        //通过异常工具类封装成自定义的ApiException
                         dataCall.fail(CustomException.handleException(throwable));
                     }
                 });

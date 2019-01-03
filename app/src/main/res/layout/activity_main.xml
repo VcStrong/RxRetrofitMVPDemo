@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/register_btn"
+    <RelativeLayout
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登录" />
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/cate_list"
+            android:padding="15dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/common_nav_btn_menu_n"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/search"
+            android:padding="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/common_nav_btn_search_n"
+            />
+    </RelativeLayout>
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangle"
         android:layout_height="90dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:layout_weight="1"
-            android:layout_marginTop="36dp"
-            android:src="@mipmap/ic_launcher"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+        <RadioButton
+            android:id="@+id/home_btn"
+            style="@style/main_bottom_btn_style"
+            android:drawableTop="@drawable/common_tab_btn_home"/>
+        <RadioButton
+            android:id="@+id/circle_btn"
+            style="@style/main_bottom_btn_style"
+            android:drawableTop="@drawable/common_tab_btn_circle"/>
+        <RadioButton
+            android:id="@+id/cart_btn"
+            style="@style/main_bottom_btn_style"
             android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:drawableTop="@drawable/common_tab_btn_shop_cart_n"/>
+        <RadioButton
+            android:id="@+id/list_btn"
+            style="@style/main_bottom_btn_style"
+            android:drawableTop="@drawable/common_tab_btn_list"/>
+        <RadioButton
+            android:id="@+id/me_btn"
+            style="@style/main_bottom_btn_style"
+            android:drawableTop="@drawable/common_tab_btn_my"/>
+    </RadioGroup>
 
-    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-38dp"
+        android:layout_above="@+id/bottom_menu"
+        android:layout_below="@+id/title_bar">
+
+    </FrameLayout>
 
 </RelativeLayout>

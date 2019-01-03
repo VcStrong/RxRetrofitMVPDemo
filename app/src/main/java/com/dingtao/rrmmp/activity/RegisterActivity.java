@@ -5,43 +5,36 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.bean.UserInfo;
 import com.dingtao.rrmmp.core.DataCall;
 import com.dingtao.rrmmp.core.WDActivity;
 import com.dingtao.rrmmp.core.WDApplication;
-import com.dingtao.rrmmp.core.db.DaoMaster;
-import com.dingtao.rrmmp.core.db.UserInfoDao;
 import com.dingtao.rrmmp.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.LoginPresenter;
+import com.dingtao.rrmmp.presenter.RegisterPresenter;
 import com.dingtao.rrmmp.util.MD5Utils;
 import com.dingtao.rrmmp.util.UIUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 
-public class LoginActivity extends WDActivity {
+public class RegisterActivity extends WDActivity {
 
-    LoginPresenter requestPresenter;
+    RegisterPresenter requestPresenter;
     @BindView(R.id.login_mobile)
     EditText mMobile;
 
     @BindView(R.id.login_pas)
     EditText mPas;
 
-    @BindView(R.id.login_rem_pas)
-    CheckBox mRemPas;
-
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
@@ -51,39 +44,23 @@ public class LoginActivity extends WDActivity {
 
     @Override
     protected void initView() {
-        requestPresenter = new LoginPresenter(new LoginCall());
-        boolean remPas = WDApplication.getShare().getBoolean("remPas",true);
-        if (remPas){
-            mRemPas.setChecked(true);
-            mMobile.setText(WDApplication.getShare().getString("mobile",""));
-            mPas.setText(WDApplication.getShare().getString("pas",""));
-        }
+        requestPresenter = new RegisterPresenter(new RegisterCall());
     }
 
-    @OnClick(R.id.login_btn)
+    @OnClick(R.id.register_btn)
     public void login(){
         String m = mMobile.getText().toString();
         String p = mPas.getText().toString();
         if (TextUtils.isEmpty(m)){
-            Toast.makeText(this,"请输入正确的手机号",Toast.LENGTH_LONG).show();
+            UIUtils.showToastSafe("请输入正确的手机号");
             return;
         }
         if (TextUtils.isEmpty(p)){
-            Toast.makeText(this,"请输入密码",Toast.LENGTH_LONG).show();
+            UIUtils.showToastSafe("请输入密码");
             return;
-        }
-        if (mRemPas.isChecked()){
-            WDApplication.getShare().edit().putString("mobile",m)
-                    .putString("pas",p).commit();
         }
         mLoadDialog.show();
         requestPresenter.reqeust(m,MD5Utils.md5(p));
-    }
-
-    @OnClick(R.id.login_rem_pas)
-    public void remPas(){
-        WDApplication.getShare().edit()
-                .putBoolean("remPas",mRemPas.isChecked()).commit();
     }
 
     private boolean pasVisibile = false;
@@ -99,35 +76,27 @@ public class LoginActivity extends WDActivity {
         }
     }
 
-    @OnClick(R.id.register_text)
-    public void register(){
-        intent(RegisterActivity.class);
+    @OnClick(R.id.login_text)
+    public void remPas(){
+       finish();
     }
-
-
 
     /**
      * @author dingtao
      * @date 2018/12/28 10:44 AM
-     * 登录
+     * 注册
      */
-    class LoginCall implements DataCall<Result<UserInfo>> {
+    class RegisterCall implements DataCall<Result> {
 
         @Override
-        public void success(Result<UserInfo> result) {
+        public void success(Result result) {
             mLoadDialog.cancel();
             if (result.getStatus().equals("0000")){
-                result.getResult().setStatus(1);//设置登录状态，保存到数据库
-                UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(),UserInfoDao.TABLENAME).getUserInfoDao();
-                userInfoDao.insertOrReplace(result.getResult());
-                intent(MainActivity.class);
+                UIUtils.showToastSafe("注册成功，请登录");
                 finish();
             }else{
                 UIUtils.showToastSafe(result.getStatus()+"  "+result.getMessage());
             }
-            //result.getData().setStatus(1);设置用户登录状态为1
-            //userdao.insertOrReplace(result.getData());保存用户数据
-            //跳转页面
         }
 
         @Override
