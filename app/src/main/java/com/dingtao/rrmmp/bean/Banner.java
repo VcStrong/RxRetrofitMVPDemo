@@ -8,7 +8,8 @@ package com.dingtao.rrmmp.bean;
 public class Banner {
     String imageUrl;
     String jumpUrl;
-    UserInfo rank;
+    int rank;
+    String title;
 
     public String getImageUrl() {
         return imageUrl;
@@ -26,11 +27,19 @@ public class Banner {
         this.jumpUrl = jumpUrl;
     }
 
-    public UserInfo getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(UserInfo rank) {
+    public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

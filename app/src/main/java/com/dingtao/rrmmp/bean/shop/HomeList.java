@@ -8,31 +8,31 @@ import java.util.List;
  * qq:1940870847
  */
 public class HomeList {
-    CommodityList rxxp;
-    CommodityList mlss;
-    CommodityList pzsh;
+    List<CommodityList> rxxp;
+    List<CommodityList> mlss;
+    List<CommodityList> pzsh;
 
-    public CommodityList getRxxp() {
+    public List<CommodityList> getRxxp() {
         return rxxp;
     }
 
-    public void setRxxp(CommodityList rxxp) {
+    public void setRxxp(List<CommodityList> rxxp) {
         this.rxxp = rxxp;
     }
 
-    public CommodityList getMlss() {
+    public List<CommodityList> getMlss() {
         return mlss;
     }
 
-    public void setMlss(CommodityList mlss) {
+    public void setMlss(List<CommodityList> mlss) {
         this.mlss = mlss;
     }
 
-    public CommodityList getPzsh() {
+    public List<CommodityList> getPzsh() {
         return pzsh;
     }
 
-    public void setPzsh(CommodityList pzsh) {
+    public void setPzsh(List<CommodityList> pzsh) {
         this.pzsh = pzsh;
     }
 }

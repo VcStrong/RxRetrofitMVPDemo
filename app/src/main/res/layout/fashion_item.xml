@@ -3,12 +3,14 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/item_layer_shadow"
     android:padding="10dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image"
         android:layout_width="85dp"
         android:layout_height="100dp"
+
         android:layout_alignParentLeft="true"
         fresco:roundedCornerRadius="8dp" />
 
@@ -17,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="aaa"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_toRightOf="@+id/image"
         android:layout_alignBottom="@+id/image"
@@ -27,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_alignTop="@+id/image"
         android:layout_toRightOf="@+id/image"
         android:layout_above="@+id/price"

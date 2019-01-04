@@ -18,6 +18,7 @@ import com.dingtao.rrmmp.core.WDFragment;
 import com.dingtao.rrmmp.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.BannerPresenter;
 import com.dingtao.rrmmp.presenter.HomeListPresenter;
+import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  * @date 2019/1/2 10:28
  * qq:1940870847
  */
-public class MainFragment extends WDFragment {
+public class HomeFragment extends WDFragment {
 
     @BindView(R.id.banner)
     MZBannerView mMZBanner;
@@ -69,8 +70,14 @@ public class MainFragment extends WDFragment {
         mLifeAdapter = new CommodityAdpater(getContext(),CommodityAdpater.HOT_TYPE);
 
         mHotList.setLayoutManager(new GridLayoutManager(getContext(),3));
-        mFashionList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mFashionList.setLayoutManager(new GridLayoutManager(getContext(),1));
         mLifeList.setLayoutManager(new GridLayoutManager(getContext(),2));
+
+        int space = getResources().getDimensionPixelSize(R.dimen.dip_10);
+
+        mHotList.addItemDecoration(new SpacingItemDecoration(space));
+        mFashionList.addItemDecoration(new SpacingItemDecoration(space));
+        mLifeList.addItemDecoration(new SpacingItemDecoration(space));
 
         mHotList.setAdapter(mHotAdapter);
         mFashionList.setAdapter(mFashionAdapter);
@@ -156,9 +163,9 @@ public class MainFragment extends WDFragment {
         public void success(Result<HomeList> data) {
             if (data.getStatus().equals("0000")){
                 //添加列表并刷新
-                mHotAdapter.addAll(data.getResult().getRxxp().getCommodityList());
-                mFashionAdapter.addAll(data.getResult().getMlss().getCommodityList());
-                mLifeAdapter.addAll(data.getResult().getPzsh().getCommodityList());
+                mHotAdapter.addAll(data.getResult().getRxxp().get(0).getCommodityList());
+                mFashionAdapter.addAll(data.getResult().getMlss().get(0).getCommodityList());
+                mLifeAdapter.addAll(data.getResult().getPzsh().get(0).getCommodityList());
                 mHotAdapter.notifyDataSetChanged();
                 mFashionAdapter.notifyDataSetChanged();
                 mLifeAdapter.notifyDataSetChanged();

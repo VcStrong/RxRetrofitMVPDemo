@@ -22,6 +22,8 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BasePresenter {
     private DataCall dataCall;
 
+    private boolean running;
+
     public BasePresenter(DataCall dataCall) {
         this.dataCall = dataCall;
     }
@@ -29,6 +31,10 @@ public abstract class BasePresenter {
     protected abstract Observable observable(Object... args);
 
     public void reqeust(Object... args) {
+        if (running) {
+            return;
+        }
+        running = true;
         observable(args)
                 .compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
                 .compose(new ObservableTransformer() {
@@ -43,11 +49,13 @@ public abstract class BasePresenter {
                 .subscribe(new Consumer<Result>() {
                     @Override
                     public void accept(Result result) throws Exception {
+                        running = false;
                         dataCall.success(result);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        running = false;
                         // 处理异常
 //                        UIUtils.showToastSafe("请求失败");
                         //通过异常工具类封装成自定义的ApiException
@@ -55,6 +63,10 @@ public abstract class BasePresenter {
                     }
                 });
 
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 
     public void unBind() {

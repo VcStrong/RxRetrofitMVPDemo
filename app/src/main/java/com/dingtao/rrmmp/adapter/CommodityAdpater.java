@@ -46,7 +46,7 @@ public class CommodityAdpater extends RecyclerView.Adapter<CommodityAdpater.MyHo
            View view = View.inflate(viewGroup.getContext(), R.layout.hot_item, null);
            return new MyHolder(view);
        }else {
-           View view = View.inflate(viewGroup.getContext(), R.layout.hot_item, null);
+           View view = View.inflate(viewGroup.getContext(), R.layout.fashion_item, null);
            return new MyHolder(view);
        }
     }
@@ -71,7 +71,7 @@ public class CommodityAdpater extends RecyclerView.Adapter<CommodityAdpater.MyHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     class MyHolder extends RecyclerView.ViewHolder{

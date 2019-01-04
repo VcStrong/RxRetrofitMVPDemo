@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/item_layer_shadow"
     android:padding="10dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -15,16 +16,21 @@
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="aaa"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/commdity_text_color"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="aaa"
         android:textColor="@color/commdity_price_color"

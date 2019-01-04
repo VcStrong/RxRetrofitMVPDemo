@@ -5,27 +5,16 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/title_bar"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:id="@+id/cate_list"
-            android:padding="15dp"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/common_nav_btn_menu_n"
-            />
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:id="@+id/search"
-            android:padding="15dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/common_nav_btn_search_n"
-            />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bottom_menu"
+        android:layout_alignParentBottom="true">
+
+    </FrameLayout>
 
     <RadioGroup
         android:id="@+id/bottom_menu"
@@ -37,6 +26,7 @@
 
         <RadioButton
             android:id="@+id/home_btn"
+            android:checked="true"
             style="@style/main_bottom_btn_style"
             android:drawableTop="@drawable/common_tab_btn_home"/>
         <RadioButton
@@ -57,15 +47,5 @@
             style="@style/main_bottom_btn_style"
             android:drawableTop="@drawable/common_tab_btn_my"/>
     </RadioGroup>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="-38dp"
-        android:layout_above="@+id/bottom_menu"
-        android:layout_below="@+id/title_bar">
-
-    </FrameLayout>
 
 </RelativeLayout>
