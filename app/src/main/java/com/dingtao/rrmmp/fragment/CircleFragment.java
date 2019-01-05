@@ -20,6 +20,7 @@ import com.dingtao.rrmmp.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.BannerPresenter;
 import com.dingtao.rrmmp.presenter.CirclePresenter;
 import com.dingtao.rrmmp.presenter.HomeListPresenter;
+import com.dingtao.rrmmp.util.gridview.RecyclerGridView;
 import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -39,7 +40,7 @@ import butterknife.BindView;
 public class CircleFragment extends WDFragment implements XRecyclerView.LoadingListener {
 
     @BindView(R.id.circle_list)
-    XRecyclerView mCircleList;
+    RecyclerGridView mCircleList;
 
     private CircleAdpater mCircleAdapter;
 
@@ -108,6 +109,9 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
             mCircleList.loadMoreComplete();
             if (data.getStatus().equals("0000")){
                 //添加列表并刷新
+                if (circlePresenter.getPage()==1){
+                    mCircleAdapter.clear();
+                }
                 mCircleAdapter.addAll(data.getResult());
                 mCircleAdapter.notifyDataSetChanged();
             }

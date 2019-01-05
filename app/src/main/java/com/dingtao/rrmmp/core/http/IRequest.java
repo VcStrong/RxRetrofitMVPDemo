@@ -17,6 +17,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 
@@ -56,6 +57,16 @@ public interface IRequest {
             @Header("sessionId")String sessionId,
             @Query("page")int page,
             @Query("count")int count);
+
+    /**
+     * 圈子
+     */
+    @FormUrlEncoded
+    @POST("user/findCircle/{uid}")
+    Observable<Result<List<Circle>>> findCircle(
+            @Path("uid") int uid,
+            @Field("page") int page,
+            @Field("count") int count);
 
     /**
      * 我的足迹

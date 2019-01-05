@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
+    <com.dingtao.rrmmp.util.gridview.RecyclerGridView
         android:id="@+id/circle_list"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+    </com.dingtao.rrmmp.util.gridview.RecyclerGridView>
 </LinearLayout>

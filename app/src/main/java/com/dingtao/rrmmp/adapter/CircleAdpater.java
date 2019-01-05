@@ -3,6 +3,7 @@ package com.dingtao.rrmmp.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.dingtao.rrmmp.bean.shop.Commodity;
 import com.dingtao.rrmmp.util.DateUtils;
 import com.dingtao.rrmmp.util.StringUtils;
 import com.dingtao.rrmmp.util.gridview.RecyclerGridView;
+import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.w3c.dom.Text;
@@ -77,27 +79,20 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
             }else {
                 colNum = 3;
             }
-            myHolder.gridView.setNumColumns(colNum);//设置列数
+            myHolder.gridLayoutManager.setSpanCount(colNum);//设置列数
             myHolder.imageAdapter.clear();//清空
             myHolder.imageAdapter.addAll(Arrays.asList(images));
             myHolder.imageAdapter.notifyDataSetChanged();
         }
-
-
-        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //获取分类id
-//                intent.putExtras("id",)
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void clear() {
+        list.clear();
     }
 
     class MyHolder extends RecyclerView.ViewHolder{
@@ -106,7 +101,8 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
         TextView nickname;
         TextView time;
         TextView text;
-        RecyclerGridView gridView;
+        RecyclerView gridView;
+        GridLayoutManager gridLayoutManager;
         ImageAdapter imageAdapter;
 
         public MyHolder(@NonNull View itemView) {
@@ -118,8 +114,9 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
             gridView = itemView.findViewById(R.id.grid_view);
             imageAdapter = new ImageAdapter();
             int space = context.getResources().getDimensionPixelSize(R.dimen.dip_10);;//图片间距
-            gridView.setHorizontalSpacing(space);
-            gridView.setVerticalSpacing(space);
+            gridLayoutManager = new GridLayoutManager(context,3);
+            gridView.addItemDecoration(new SpacingItemDecoration(space));
+            gridView.setLayoutManager(gridLayoutManager);
             gridView.setAdapter(imageAdapter);
         }
     }

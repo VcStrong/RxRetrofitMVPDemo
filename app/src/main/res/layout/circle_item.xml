@@ -53,11 +53,11 @@
         android:textColor="@color/commdity_text_color"
         android:textSize="12sp" />
 
-    <com.dingtao.rrmmp.util.gridview.RecyclerGridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.dingtao.rrmmp.util.gridview.RecyclerGridView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

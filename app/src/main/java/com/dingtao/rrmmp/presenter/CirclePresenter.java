@@ -15,6 +15,10 @@ public class CirclePresenter extends BasePresenter {
 
     private int page=1;
 
+    public int getPage() {
+        return page;
+    }
+
     public CirclePresenter(DataCall consumer) {
         super(consumer);
     }

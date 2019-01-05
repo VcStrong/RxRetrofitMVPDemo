@@ -1,6 +1,8 @@
 package com.dingtao.rrmmp.adapter;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,7 +18,7 @@ import java.util.List;
  * @date 2019/1/3 23:24
  * qq:1940870847
  */
-public class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
 
     private List<String> mList = new ArrayList<>();
 
@@ -24,14 +26,17 @@ public class ImageAdapter extends BaseAdapter {
         mList.addAll(list);
     }
 
+
+    @NonNull
     @Override
-    public int getCount() {
-        return mList.size();
+    public MyHodler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = View.inflate(viewGroup.getContext(), R.layout.circle_image_item,null);
+        return new MyHodler(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return mList.get(position);
+    public void onBindViewHolder(@NonNull MyHodler myHodler, int position) {
+        myHodler.image.setImageURI(Uri.parse(mList.get(position)));
     }
 
     @Override
@@ -40,24 +45,20 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MyHodler myHodler ;
-        if (convertView==null){
-            convertView = View.inflate(parent.getContext(), R.layout.circle_image_item,null);
-            myHodler = new MyHodler();
-            myHodler.image = convertView.findViewById(R.id.circle_image);
-            convertView.setTag(myHodler);
-        }
-        myHodler = (MyHodler) convertView.getTag();
-        myHodler.image.setImageURI(Uri.parse(mList.get(position)));
-        return convertView;
+    public int getItemCount() {
+        return mList.size();
     }
 
     public void clear() {
         mList.clear();
     }
 
-    class MyHodler {
+    class MyHodler extends RecyclerView.ViewHolder {
         SimpleDraweeView image;
+
+        public MyHodler(@NonNull View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.circle_image);
+        }
     }
 }
