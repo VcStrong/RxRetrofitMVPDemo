@@ -27,8 +27,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="140dp"
                 android:background="@drawable/my_card_bg"
-                android:paddingBottom="50dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
 
                 <TextView
                     android:id="@+id/me_nickname"
@@ -209,6 +209,51 @@
                         android:background="#ededed" />
 
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/me_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="24dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/my_icon_wallet_n" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:text="设置"
+                        android:textColor="@color/commdity_text_color"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="44dp"
+                        android:background="#ededed" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/logout_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="@dimen/dip_20"
+                    android:layout_marginRight="30dp"
+                    android:background="@android:color/holo_red_light"
+                    android:text="退出登录"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 

@@ -30,7 +30,7 @@
         </activity>
         <activity android:name="com.dingtao.rrmmp.activity.LoginActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
-
+        <activity android:name="com.dingtao.rrmmp.activity.SetActivity"/>
     </application>
 
 </manifest>

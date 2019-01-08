@@ -1,5 +1,7 @@
 package com.dingtao.rrmmp.bean;
 
+import java.util.List;
+
 /**
  * @author dingtao
  * @date 2018/12/28 10:05
@@ -10,6 +12,7 @@ public class Result<T> {
     String message;
     T result;
     String headPath;
+
 
     public String getStatus() {
         return status;

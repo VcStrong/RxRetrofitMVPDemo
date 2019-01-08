@@ -7,19 +7,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.bean.Circle;
-import com.dingtao.rrmmp.bean.shop.Commodity;
 import com.dingtao.rrmmp.util.DateUtils;
 import com.dingtao.rrmmp.util.StringUtils;
-import com.dingtao.rrmmp.util.gridview.RecyclerGridView;
 import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -71,17 +66,25 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
         }else{
             myHolder.gridView.setVisibility(View.VISIBLE);
             String[] images = circle.getImage().split(",");
+
+            int imageCount = (int)(Math.random()*9)+1;
+
             int colNum;//列数
-            if (images.length == 1){
+            if (imageCount == 1){
                 colNum = 1;
-            }else if (images.length == 2||images.length == 4){
+            }else if (imageCount == 2||imageCount == 4){
                 colNum = 2;
             }else {
                 colNum = 3;
             }
-            myHolder.gridLayoutManager.setSpanCount(colNum);//设置列数
             myHolder.imageAdapter.clear();//清空
-            myHolder.imageAdapter.addAll(Arrays.asList(images));
+            for (int i = 0; i <imageCount ; i++) {
+                myHolder.imageAdapter.addAll(Arrays.asList(images));
+            }
+
+            myHolder.gridLayoutManager.setSpanCount(colNum);//设置列数
+
+
             myHolder.imageAdapter.notifyDataSetChanged();
         }
     }

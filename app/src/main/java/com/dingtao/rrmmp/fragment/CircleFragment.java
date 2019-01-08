@@ -1,32 +1,17 @@
 package com.dingtao.rrmmp.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.adapter.CircleAdpater;
-import com.dingtao.rrmmp.adapter.CommodityAdpater;
-import com.dingtao.rrmmp.bean.Banner;
 import com.dingtao.rrmmp.bean.Circle;
 import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.bean.shop.HomeList;
 import com.dingtao.rrmmp.core.DataCall;
 import com.dingtao.rrmmp.core.WDFragment;
 import com.dingtao.rrmmp.core.exception.ApiException;
-import com.dingtao.rrmmp.presenter.BannerPresenter;
 import com.dingtao.rrmmp.presenter.CirclePresenter;
-import com.dingtao.rrmmp.presenter.HomeListPresenter;
-import com.dingtao.rrmmp.util.gridview.RecyclerGridView;
 import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.zhouwei.mzbanner.MZBannerView;
-import com.zhouwei.mzbanner.holder.MZHolderCreator;
-import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import java.util.List;
 
@@ -40,7 +25,7 @@ import butterknife.BindView;
 public class CircleFragment extends WDFragment implements XRecyclerView.LoadingListener {
 
     @BindView(R.id.circle_list)
-    RecyclerGridView mCircleList;
+    XRecyclerView mCircleList;
 
     private CircleAdpater mCircleAdapter;
 

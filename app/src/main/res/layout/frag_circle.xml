@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent">
-    <com.dingtao.rrmmp.util.gridview.RecyclerGridView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/circle_list"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.dingtao.rrmmp.util.gridview.RecyclerGridView>
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 </LinearLayout>

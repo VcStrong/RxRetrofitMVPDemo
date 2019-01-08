@@ -1,8 +1,18 @@
 package com.dingtao.rrmmp.core.http;
 
+import com.dingtao.rrmmp.bean.UserInfo;
+import com.dingtao.rrmmp.core.WDApplication;
+import com.dingtao.rrmmp.core.db.DaoMaster;
+import com.dingtao.rrmmp.core.db.UserInfoDao;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -35,6 +45,19 @@ public class NetworkManager {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+//                .addInterceptor(new Interceptor() {
+//                    @Override
+//                    public Response intercept(Chain chain) throws IOException {
+//                        UserInfoDao userInfoDao = DaoMaster.newDevSession(WDApplication.getContext(),UserInfoDao.TABLENAME).getUserInfoDao();
+//                        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
+//                        UserInfo userInfo = userInfos.get(0);//读取第一项
+//                        Request request = chain.request().newBuilder()
+//                                .addHeader("userId",userInfo.getUserId()+"")
+//                                .addHeader("sessionId",userInfo.getSessionId())
+//                                .build();
+//                        return chain.proceed(request);
+//                    }
+//                })
                 .connectTimeout(10,TimeUnit.SECONDS)
                 .writeTimeout(10,TimeUnit.SECONDS)
                 .readTimeout(10,TimeUnit.SECONDS)

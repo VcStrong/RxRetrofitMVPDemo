@@ -36,10 +36,10 @@ public class MainActivity extends WDActivity implements RadioGroup.OnCheckedChan
         circleFragment = new CircleFragment();
         meFragment = new MeFragment();
 
-        currentFragment = circleFragment;
+        currentFragment = homeFragment;
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.add(R.id.container, circleFragment)
-                .show(circleFragment).commit();
+        tx.add(R.id.container, homeFragment)
+                .show(homeFragment).commit();
 
     }
 

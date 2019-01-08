@@ -1,5 +1,6 @@
 package com.dingtao.rrmmp.core;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,6 +8,9 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @name: MyApplication
@@ -16,7 +20,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * @remark:
  */
 public class WDApplication extends Application {
-
     /** 主线程ID */
     private static int mMainThreadId = -1;
     /** 主线程ID */

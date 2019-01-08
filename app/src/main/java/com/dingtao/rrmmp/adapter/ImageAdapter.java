@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.dingtao.rrmmp.R;
+import com.dingtao.rrmmp.util.UIUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -37,6 +38,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
     @Override
     public void onBindViewHolder(@NonNull MyHodler myHodler, int position) {
         myHodler.image.setImageURI(Uri.parse(mList.get(position)));
+        myHodler.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIUtils.showToastSafe("点击了图片");
+            }
+        });
     }
 
     @Override
