@@ -67,7 +67,8 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
             myHolder.gridView.setVisibility(View.VISIBLE);
             String[] images = circle.getImage().split(",");
 
-            int imageCount = (int)(Math.random()*9)+1;
+//            int imageCount = (int)(Math.random()*9)+1;
+            int imageCount = images.length;
 
             int colNum;//列数
             if (imageCount == 1){
@@ -78,10 +79,10 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
                 colNum = 3;
             }
             myHolder.imageAdapter.clear();//清空
-            for (int i = 0; i <imageCount ; i++) {
-                myHolder.imageAdapter.addAll(Arrays.asList(images));
-            }
-
+//            for (int i = 0; i <imageCount ; i++) {
+//                myHolder.imageAdapter.addAll(Arrays.asList(images));
+//            }
+            myHolder.imageAdapter.addAll(Arrays.asList(images));
             myHolder.gridLayoutManager.setSpanCount(colNum);//设置列数
 
 

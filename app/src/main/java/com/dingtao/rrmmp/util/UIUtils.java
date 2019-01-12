@@ -1,6 +1,7 @@
 package com.dingtao.rrmmp.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,23 +53,40 @@ public class UIUtils {
 		return WDApplication.getMainThreadHandler();
 	}
 
-	/**
-	 * 直接載入圖片
-	 */
-	public static Bitmap getBitmap(String path) {
+	public static Bitmap decodeFile(File f,int imageSize){
 		try {
-			File f = new File(path);
-			if (!f.exists()) {
-				return null;
+			//解码图像大小,对图片进行缩放...防止图片过大导致内存溢出...
+			BitmapFactory.Options o = new BitmapFactory.Options();//实例化一个对象...
+
+			o.inJustDecodeBounds = true;//这个就是Options的第一个属性,设置为true的时候，不会完全的对图片进行解码操作,不会为其分配内存，只是获取图片的基本信息...
+
+			BitmapFactory.decodeStream(new FileInputStream(f),null,o); //以码流的形式进行解码....
+
+			/*
+			 * 下面也就是对图片进行的一个压缩的操作...如果图片过大，最后会根据指定的数值进行缩放...
+			 * 找到正确的刻度值，它应该是2的幂.
+			 * 这里我指定了图片的长度和宽度为200个像素...
+			 *
+			 * */
+
+			int width_tmp=o.outWidth, height_tmp=o.outHeight;
+			int scale=1;
+			while(true){
+				if(width_tmp/2<imageSize || height_tmp/2<imageSize)
+					break;
+				width_tmp/=2;
+				height_tmp/=2;
+				scale*=2;
 			}
 
-			Options opts = new Options();
-			opts.inPreferredConfig = Config.RGB_565;
-			Bitmap bt = BitmapFactory.decodeFile(path, opts);
-			return bt;
+			BitmapFactory.Options o2 = new BitmapFactory.Options(); //这里定义了一个新的对象...获取的还是同一张图片...
+			o2.inPreferredConfig = Config.RGB_565;
+			o2.inSampleSize=scale;   //对这张图片设置一个缩放值...inJustDecodeBounds不需要进行设置...
+			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2); //这样通过这个方法就可以产生一个小的图片资源了...
 		} catch (Exception e) {
-			return null;
-		}
+		    e.printStackTrace();
+        }
+		return null;
 	}
 
 	/** 延时在主线程执行runnable */

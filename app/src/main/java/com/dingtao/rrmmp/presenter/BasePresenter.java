@@ -1,11 +1,24 @@
 package com.dingtao.rrmmp.presenter;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
+
+import com.dingtao.rrmmp.activity.LoginActivity;
 import com.dingtao.rrmmp.bean.Result;
+import com.dingtao.rrmmp.bean.UserInfo;
 import com.dingtao.rrmmp.core.DataCall;
+import com.dingtao.rrmmp.core.WDActivity;
+import com.dingtao.rrmmp.core.WDApplication;
+import com.dingtao.rrmmp.core.db.DaoMaster;
+import com.dingtao.rrmmp.core.db.UserInfoDao;
 import com.dingtao.rrmmp.core.exception.ApiException;
 import com.dingtao.rrmmp.core.exception.CustomException;
 import com.dingtao.rrmmp.core.exception.ResponseTransformer;
 import com.dingtao.rrmmp.util.UIUtils;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -23,6 +36,7 @@ public abstract class BasePresenter {
     private DataCall dataCall;
 
     private boolean running;
+    private Observable observable;
 
     public BasePresenter(DataCall dataCall) {
         this.dataCall = dataCall;
@@ -34,9 +48,10 @@ public abstract class BasePresenter {
         if (running) {
             return;
         }
+
         running = true;
-        observable(args)
-                .compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
+        observable = observable(args);
+        observable.compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
                 .compose(new ObservableTransformer() {
                     @Override
                     public ObservableSource apply(Observable upstream) {
@@ -50,7 +65,11 @@ public abstract class BasePresenter {
                     @Override
                     public void accept(Result result) throws Exception {
                         running = false;
+//                        if (result.getStatus().equals("1001")){
+//                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
+//                        }else {
                         dataCall.success(result);
+//                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -63,6 +82,12 @@ public abstract class BasePresenter {
                     }
                 });
 
+    }
+
+    public void cancelRequest() {
+        if (observable!=null){
+            observable.unsubscribeOn(Schedulers.io());
+        }
     }
 
     public boolean isRunning() {

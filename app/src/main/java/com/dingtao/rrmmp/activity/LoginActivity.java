@@ -1,11 +1,10 @@
 package com.dingtao.rrmmp.activity;
 
-import android.os.Bundle;
-import android.text.InputType;
+import android.Manifest;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,7 +24,7 @@ import com.dingtao.rrmmp.util.UIUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class LoginActivity extends WDActivity {
 
@@ -52,58 +51,87 @@ public class LoginActivity extends WDActivity {
     @Override
     protected void initView() {
         requestPresenter = new LoginPresenter(new LoginCall());
-        boolean remPas = WDApplication.getShare().getBoolean("remPas",true);
-        if (remPas){
+        boolean remPas = WDApplication.getShare().getBoolean("remPas", true);
+        if (remPas) {
             mRemPas.setChecked(true);
-            mMobile.setText(WDApplication.getShare().getString("mobile",""));
-            mPas.setText(WDApplication.getShare().getString("pas",""));
+            mMobile.setText(WDApplication.getShare().getString("mobile", ""));
+            mPas.setText(WDApplication.getShare().getString("pas", ""));
+        }
+        if (!EasyPermissions.hasPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
+            EasyPermissions.requestPermissions(this,
+                    "发布图片",10,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE});
         }
     }
 
     @OnClick(R.id.login_btn)
-    public void login(){
+    public void login() {
         String m = mMobile.getText().toString();
         String p = mPas.getText().toString();
-        if (TextUtils.isEmpty(m)){
-            Toast.makeText(this,"请输入正确的手机号",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(m)) {
+            Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(p)){
-            Toast.makeText(this,"请输入密码",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(p)) {
+            Toast.makeText(this, "请输入密码", Toast.LENGTH_LONG).show();
             return;
         }
-        if (mRemPas.isChecked()){
-            WDApplication.getShare().edit().putString("mobile",m)
-                    .putString("pas",p).commit();
+        if (mRemPas.isChecked()) {
+            WDApplication.getShare().edit().putString("mobile", m)
+                    .putString("pas", p).commit();
         }
         mLoadDialog.show();
-        requestPresenter.reqeust(m,MD5Utils.md5(p));
+        requestPresenter.reqeust(m, MD5Utils.md5(p));
+    }
+
+    /**
+     * 重写onRequestPermissionsResult，用于接受请求结果
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //将请求结果传递EasyPermission库处理
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void cancelLoadDialog() {
+        super.cancelLoadDialog();
+        requestPresenter.cancelRequest();
     }
 
     @OnClick(R.id.login_rem_pas)
-    public void remPas(){
+    public void remPas() {
         WDApplication.getShare().edit()
-                .putBoolean("remPas",mRemPas.isChecked()).commit();
+                .putBoolean("remPas", mRemPas.isChecked()).commit();
     }
 
     private boolean pasVisibile = false;
 
     @OnClick(R.id.login_pas_eye)
-    public void eyePas(){
-        if (pasVisibile){//密码显示，则隐藏
+    public void eyePas() {
+        if (pasVisibile) {//密码显示，则隐藏
             mPas.setTransformationMethod(PasswordTransformationMethod.getInstance());
             pasVisibile = false;
-        }else{//密码隐藏则显示
+        } else {//密码隐藏则显示
             mPas.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             pasVisibile = true;
         }
     }
 
     @OnClick(R.id.register_text)
-    public void register(){
+    public void register() {
         intent(RegisterActivity.class);
     }
-
 
 
     /**
@@ -116,14 +144,14 @@ public class LoginActivity extends WDActivity {
         @Override
         public void success(Result<UserInfo> result) {
             mLoadDialog.cancel();
-            if (result.getStatus().equals("0000")){
+            if (result.getStatus().equals("0000")) {
                 result.getResult().setStatus(1);//设置登录状态，保存到数据库
-                UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(),UserInfoDao.TABLENAME).getUserInfoDao();
+                UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
                 userInfoDao.insertOrReplace(result.getResult());
                 intent(MainActivity.class);
                 finish();
-            }else{
-                UIUtils.showToastSafe(result.getStatus()+"  "+result.getMessage());
+            } else {
+                UIUtils.showToastSafe(result.getStatus() + "  " + result.getMessage());
             }
             //result.getData().setStatus(1);设置用户登录状态为1
             //userdao.insertOrReplace(result.getData());保存用户数据
@@ -133,7 +161,7 @@ public class LoginActivity extends WDActivity {
         @Override
         public void fail(ApiException e) {
             mLoadDialog.cancel();
-            UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
+            UIUtils.showToastSafe(e.getCode() + " " + e.getDisplayMessage());
         }
     }
 }

@@ -52,4 +52,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
     implementation project(':xlistview')
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'pub.devrel:easypermissions:2.0.0'
 }

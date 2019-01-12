@@ -1,8 +1,10 @@
 package com.dingtao.rrmmp.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.dingtao.rrmmp.R;
+import com.dingtao.rrmmp.activity.AddCircleActivity;
 import com.dingtao.rrmmp.adapter.CircleAdpater;
 import com.dingtao.rrmmp.bean.Circle;
 import com.dingtao.rrmmp.bean.Result;
@@ -16,6 +18,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author dingtao
@@ -26,6 +29,8 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
 
     @BindView(R.id.circle_list)
     XRecyclerView mCircleList;
+
+    public static boolean addCircle;//如果添加成功，则为true
 
     private CircleAdpater mCircleAdapter;
 
@@ -62,6 +67,15 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (addCircle){//publish new message,so you have to refresh
+            addCircle = false;
+            mCircleList.refresh();
+        }
+    }
+
+    @Override
     public void onRefresh() {
         if (circlePresenter.isRunning()){
             mCircleList.refreshComplete();
@@ -79,6 +93,12 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
         }
         circlePresenter.reqeust(false,LOGIN_USER.getUserId(),
                 LOGIN_USER.getSessionId());
+    }
+
+    @OnClick(R.id.add_circle)
+    public void addCircle(){
+        Intent intent = new Intent(getContext(),AddCircleActivity.class);
+        startActivity(intent);
     }
 
     /**

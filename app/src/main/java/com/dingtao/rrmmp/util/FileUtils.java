@@ -31,7 +31,7 @@ public class FileUtils {
 
     private static final int BUFF_SIZE = 1024 * 1024;
 
-    public static final String ROOT_DIR = "tuibo";
+    public static final String ROOT_DIR = "weidu";
     //tencent
     private static final String DOWNLOAD_DIR = "download";
     private static final String DATA_DIR = "data";

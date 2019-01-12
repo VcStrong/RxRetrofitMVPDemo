@@ -3,6 +3,8 @@
     package="com.dingtao.rrmmp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name="com.dingtao.rrmmp.core.WDApplication"
@@ -31,6 +33,7 @@
         <activity android:name="com.dingtao.rrmmp.activity.LoginActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.SetActivity"/>
+        <activity android:name="com.dingtao.rrmmp.activity.AddCircleActivity"/>
     </application>
 
 </manifest>

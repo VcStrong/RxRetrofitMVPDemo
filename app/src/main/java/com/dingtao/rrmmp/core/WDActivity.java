@@ -103,7 +103,7 @@ public abstract class WDActivity extends AppCompatActivity {
             public boolean onKey(DialogInterface dialog, int keyCode,
                                  KeyEvent event) {
                 if (mLoadDialog.isShowing() && keyCode == KeyEvent.KEYCODE_BACK) {
-                    cancelLoadDialog();
+                    cancelLoadDialog();//加载消失的同时
                     mLoadDialog.cancel();
                 }
                 return false;

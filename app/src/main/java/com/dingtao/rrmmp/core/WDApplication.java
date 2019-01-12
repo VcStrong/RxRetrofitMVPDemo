@@ -9,14 +9,9 @@ import android.os.Looper;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @name: MyApplication
- * @describe: 程序入口
- * @author: 康海涛 QQ2541849981
- * @time: 2018/8/14 12:45
  * @remark:
  */
 public class WDApplication extends Application {
