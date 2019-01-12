@@ -56,6 +56,7 @@ public class AddCircleActivity extends WDActivity implements DataCall<Result> {
     @Override
     protected void initView() {
         mImageAdapter = new ImageAdapter();
+        mImageAdapter.setSign(1);
         mImageAdapter.add(R.drawable.mask_01);
         mImageList.setLayoutManager(new GridLayoutManager(this,3));
         mImageList.setAdapter(mImageAdapter);

@@ -24,9 +24,14 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
 
     private List<Object> mList = new ArrayList<>();
+    private int sign;//0:普通点击，1自定义
 
     public void addAll(List<Object> list) {
         mList.addAll(list);
+    }
+
+    public void setSign(int sign){
+        this.sign = sign;
     }
 
 
@@ -56,12 +61,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
         myHodler.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position == 0) {
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    WDActivity.getForegroundActivity().startActivityForResult(intent, WDActivity.PHOTO);
-                } else {
+                if (sign == 1) {//自定义点击
+                    if (position == 0) {
+                        Intent intent = new Intent(
+                                Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        WDActivity.getForegroundActivity().startActivityForResult(intent, WDActivity.PHOTO);
+                    } else {
+                        UIUtils.showToastSafe("点击了图片");
+                    }
+                }else{
                     UIUtils.showToastSafe("点击了图片");
                 }
             }
