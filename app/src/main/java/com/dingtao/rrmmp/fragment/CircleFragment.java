@@ -12,6 +12,8 @@ import com.dingtao.rrmmp.core.DataCall;
 import com.dingtao.rrmmp.core.WDFragment;
 import com.dingtao.rrmmp.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.CirclePresenter;
+import com.dingtao.rrmmp.presenter.GreatPresenter;
+import com.dingtao.rrmmp.util.UIUtils;
 import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -25,7 +27,7 @@ import butterknife.OnClick;
  * @date 2019/1/2 10:28
  * qq:1940870847
  */
-public class CircleFragment extends WDFragment implements XRecyclerView.LoadingListener {
+public class CircleFragment extends WDFragment implements XRecyclerView.LoadingListener,CircleAdpater.GreatListener {
 
     @BindView(R.id.circle_list)
     XRecyclerView mCircleList;
@@ -56,6 +58,8 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
         int space = getResources().getDimensionPixelSize(R.dimen.dip_20);
 
         mCircleList.addItemDecoration(new SpacingItemDecoration(space));
+
+        mCircleAdapter.setGreatListener(this);
 
         mCircleList.setAdapter(mCircleAdapter);
         mCircleList.setLoadingListener(this);
@@ -101,6 +105,12 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
         startActivity(intent);
     }
 
+    @Override
+    public void great(int position,Circle circle) {
+        GreatPresenter greatPresenter = new GreatPresenter(new GreatCall());
+        greatPresenter.reqeust(LOGIN_USER.getUserId()+"",LOGIN_USER.getSessionId(),circle.getId(),position,circle);
+    }
+
     /**
      * @author dingtao
      * @date 2019/1/3 9:23 AM
@@ -126,6 +136,30 @@ public class CircleFragment extends WDFragment implements XRecyclerView.LoadingL
         public void fail(ApiException e) {
             mCircleList.refreshComplete();
             mCircleList.loadMoreComplete();
+        }
+    }
+
+    class GreatCall implements DataCall<Result>{
+
+        @Override
+        public void success(Result data) {
+            int position = (int) data.getArgs()[3];
+            UIUtils.showToastSafe("点击"+position+ "    adapter条目："+mCircleAdapter.getItemCount()
+                    +"    recycler条目："+mCircleList.getChildCount());
+            Circle circle = (Circle) data.getArgs()[4];
+            if (data.getStatus().equals("0000")){
+                Circle nowCircle = mCircleAdapter.getItem(position);
+                if (nowCircle.getId() == circle.getId()){
+                    nowCircle.setGreatNum(nowCircle.getGreatNum()+1);
+                    nowCircle.setWhetherGreat(1);
+                    mCircleAdapter.notifyItemChanged(position+1,0);
+                }
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
         }
     }
 

@@ -45,15 +45,30 @@
                 app:canLoop="true"
                 app:open_mz_mode="true" />
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/main_frag_hot_bg"
-                android:gravity="center"
-                android:text="热销新品"
-                android:textColor="#ff7f57"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/main_frag_hot_bg"
+                    android:gravity="center"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="24dp"
+                    android:text="热销新品"
+                    android:textColor="#ff7f57"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="24dp"
+                    android:src="@drawable/common_btn_more_n" />
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hot_list"

@@ -60,4 +60,29 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <LinearLayout
+        android:id="@+id/prise_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="14dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="right">
+        <ImageView
+            android:id="@+id/prise_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="@dimen/dip_10"
+            android:src="@drawable/common_btn_prise_n"/>
+        <TextView
+            android:id="@+id/prise_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/commdity_text_color"
+            android:text="0"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -74,6 +74,16 @@ public interface IRequest {
             @Field("count") int count);
 
     /**
+     * 圈子点赞
+     */
+    @FormUrlEncoded
+    @POST("circle/verify/v1/addCircleGreat")
+    Observable<Result> addCircleGreat(
+            @Header("userId") String userId,
+            @Header("sessionId")String sessionId,
+            @Field("circleId") long circleId);
+
+    /**
      * 我的足迹
      */
     @GET("commodity/verify/v1/browseList")

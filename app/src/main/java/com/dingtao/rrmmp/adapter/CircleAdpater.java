@@ -7,10 +7,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.bean.Circle;
+import com.dingtao.rrmmp.bean.Result;
+import com.dingtao.rrmmp.core.DataCall;
+import com.dingtao.rrmmp.core.exception.ApiException;
+import com.dingtao.rrmmp.presenter.GreatPresenter;
 import com.dingtao.rrmmp.util.DateUtils;
 import com.dingtao.rrmmp.util.StringUtils;
 import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
@@ -31,6 +37,7 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
 
     Context context;
     private List<Circle> list = new ArrayList<>();
+    private GreatPresenter greatPresenter;
 
     public CircleAdpater(Context context){
         this.context = context;
@@ -88,6 +95,22 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
 
             myHolder.imageAdapter.notifyDataSetChanged();
         }
+
+        if (circle.getWhetherGreat() == 1){
+            myHolder.priseImage.setImageResource(R.drawable.common_btn_prise_s);
+        }else{
+            myHolder.priseImage.setImageResource(R.drawable.common_btn_prise_n);
+        }
+
+        myHolder.priseText.setText(circle.getGreatNum()+"");
+        myHolder.priseLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (greatListener!=null){
+                    greatListener.great(position,circle);
+                }
+            }
+        });
     }
 
     @Override
@@ -99,6 +122,10 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
         list.clear();
     }
 
+    public Circle getItem(int postion) {
+        return list.get(postion);
+    }
+
     class MyHolder extends RecyclerView.ViewHolder{
 
         SimpleDraweeView avatar;
@@ -108,6 +135,9 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
         RecyclerView gridView;
         GridLayoutManager gridLayoutManager;
         ImageAdapter imageAdapter;
+        LinearLayout priseLayout;
+        ImageView priseImage;
+        TextView priseText;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,6 +152,19 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
             gridView.addItemDecoration(new SpacingItemDecoration(space));
             gridView.setLayoutManager(gridLayoutManager);
             gridView.setAdapter(imageAdapter);
+            priseImage = itemView.findViewById(R.id.prise_image);
+            priseText = itemView.findViewById(R.id.prise_count);
+            priseLayout = itemView.findViewById(R.id.prise_layout);
         }
+    }
+
+    private GreatListener greatListener;
+
+    public void setGreatListener(GreatListener greatListener) {
+        this.greatListener = greatListener;
+    }
+
+    public interface GreatListener{
+        void great(int position,Circle circle);
     }
 }

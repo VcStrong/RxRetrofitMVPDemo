@@ -68,6 +68,7 @@ public abstract class BasePresenter {
 //                        if (result.getStatus().equals("1001")){
 //                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
 //                        }else {
+                        result.setArgs(args);//请求参数
                         dataCall.success(result);
 //                        }
                     }
