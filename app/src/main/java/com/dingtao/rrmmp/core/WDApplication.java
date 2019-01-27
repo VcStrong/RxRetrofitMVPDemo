@@ -54,7 +54,11 @@ public class WDApplication extends Application {
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
         sharedPreferences = getSharedPreferences("share.xml", MODE_PRIVATE);
+
         Fresco.initialize(this,getConfigureCaches(this));//图片加载框架初始化
+        //定位
+        //推送
+        //统计
     }
 
     public static SharedPreferences getShare() {

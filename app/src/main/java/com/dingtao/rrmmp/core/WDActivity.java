@@ -46,9 +46,9 @@ public abstract class WDActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //查询登录用户，方便每个页面使用
-        UserInfoDao userInfoDao = DaoMaster.newDevSession(this,UserInfoDao.TABLENAME).getUserInfoDao();
+        UserInfoDao userInfoDao = DaoMaster.newDevSession(this, UserInfoDao.TABLENAME).getUserInfoDao();
         List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
-        if (userInfos!=null&&userInfos.size()>0){
+        if (userInfos != null && userInfos.size() > 0) {
             LOGIN_USER = userInfos.get(0);//读取第一项
         }
         //打印堆栈ID
@@ -58,8 +58,10 @@ public abstract class WDActivity extends AppCompatActivity {
         ButterKnife.bind(this);//绑定布局
         initView();
     }
+
     /**
      * 设置layoutId
+     *
      * @return
      */
     protected abstract int getLayoutId();

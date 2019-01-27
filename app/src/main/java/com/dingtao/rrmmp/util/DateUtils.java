@@ -1,5 +1,9 @@
 package com.dingtao.rrmmp.util;
 
+import com.dingtao.rrmmp.bean.Banner;
+import com.google.gson.Gson;
+
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,13 +14,17 @@ public class DateUtils {
     
     public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public static final String MINUTE_PATTERN = "yyyy-MM-dd HH:mm";
-    public static final String HOUR_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String MONTH_PATTERN = "yyyy-MM";
     public static final String YEAR_PATTERN = "yyyy";
     public static final String MINUTE_ONLY_PATTERN = "mm";
     public static final String HOUR_ONLY_PATTERN = "HH";
-    
+
+    public static final long YEAR_TIME_MILL = 365*24*60*60*1000L;
+    public static final long MONTH_TIME_MILL = 30*24*60*60*1000L;
+    public static final long DAY_TIME_MILL = 24*60*60*1000L;
+    public static final long HOUR_TIME_MILL = 60*60*1000L;
+
     /**
      * 日期相加减天数
      * @param date 如果为Null，则为当前时间
@@ -370,6 +378,47 @@ public class DateUtils {
         int value = cal.getActualMinimum(Calendar.DATE);
         return dateParse(dateFormat(date, MONTH_PATTERN) + "-" + value, null);
     }
+
+    /**
+     * 时间格式化成字符串
+     * @param pattern StrUtils.DATE_TIME_PATTERN || StrUtils.DATE_PATTERN， 如果为空，则为yyyy-MM-dd
+     * @return
+     * @throws ParseException
+     */
+    public static String dateTransformer(long time, String pattern) throws ParseException{
+        long disTime = System.currentTimeMillis()-time;
+        System.out.println(System.currentTimeMillis());
+        System.out.println(time);
+        if (disTime > YEAR_TIME_MILL){
+            if(StringUtils.isEmpty(pattern)){
+                pattern = DateUtils.DATE_PATTERN;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            return sdf.format(new Date(time));
+        }
+
+        if (disTime > MONTH_TIME_MILL){
+            return (disTime/MONTH_TIME_MILL)+"个月前";
+        }
+
+        if (disTime > DAY_TIME_MILL){
+            long day = disTime/DAY_TIME_MILL;
+            if (day>=7){
+                return day/7+"周前";
+            }
+            return day+"天前";
+        }
+
+        if (disTime > HOUR_TIME_MILL){
+            return (disTime/HOUR_TIME_MILL)+"个小时前";
+        }
+
+        if (disTime>60000 ){
+            return (disTime/60000)+"分钟前";
+        }else{
+            return "刚刚";
+        }
+    }
     
     public static void main(String[] args) throws Exception {
         /*System.out.println(dateTimeToDate(new Date()));
@@ -378,13 +427,30 @@ public class DateUtils {
         System.out.println(dateTimeToDateStringIfTimeEndZero(dateTimeToDate(new Date())));*/
         //System.out.println(dateBetween(dateParse("2017-01-30", null), dateParse("2017-02-01", null)));
         //System.out.println(dateBetweenIncludeToday(dateParse("2017-01-30", null), dateParse("2017-02-01", null)));
-        System.out.println(getDate(dateParse("2017-01-17", null)));
+//        System.out.println(getDate(dateParse("2017-01-17", null)));
         /*
         System.out.println(getDaysOfMonth(dateParse("2017-02-01", null)));
         System.out.println(getDaysOfYear(dateParse("2017-01-30", null)));*/
         //System.out.println(dateFormat(dateAddMonths(dateParse("2017-02-07", StrUtils.MONTH_PATTERN), -12), StrUtils.MONTH_PATTERN));
         /*System.out.println(dateFormat(maxDateOfMonth(dateParse("2016-02", "yyyy-MM")), null));
         System.out.println(dateFormat(minDateOfMonth(dateParse("2016-03-31", null)), null));*/
+
+        String time = "1542135880000";
+        System.out.println(dateFormat(new Date(Long.parseLong(time)),DATE_TIME_PATTERN));
+        System.out.println(dateFormat(new Date(Long.parseLong(time)),DATE_PATTERN));
+        System.out.println(dateTransformer(Long.parseLong(time),DATE_PATTERN));
+
+        time = "1421638283187";
+        System.out.println(dateTransformer(Long.parseLong(time),DATE_TIME_PATTERN));
+
+        Banner banner = new Banner();
+        banner.setValue(new BigDecimal(9223372036854775807L).add(new BigDecimal(9223372036854775807L)));
+        Gson gson = new Gson();
+        String result =gson.toJson(banner);
+        System.out.println(result);
+        
+        Banner banner1 = gson.fromJson(result,Banner.class);
+        System.out.println(banner1.getValue());
     }
     
     

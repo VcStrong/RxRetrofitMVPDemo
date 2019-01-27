@@ -1,6 +1,4 @@
-package com.dingtao.rrmmp.bean;
-
-import java.math.BigDecimal;
+package com.dingtao.topdemo.bean;
 
 /**
  * @author dingtao
@@ -12,16 +10,6 @@ public class Banner {
     String jumpUrl;
     int rank;
     String title;
-
-    BigDecimal value;
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
 
     public String getImageUrl() {
         return imageUrl;

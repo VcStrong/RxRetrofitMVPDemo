@@ -66,10 +66,13 @@ public abstract class BasePresenter {
                     public void accept(Result result) throws Exception {
                         running = false;
 //                        if (result.getStatus().equals("1001")){
-//                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
+////                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
+//                            Intent intent = new Intent(WDActivity.getForegroundActivity(),LoginActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            WDActivity.getForegroundActivity().startActivity(intent);
 //                        }else {
-                        result.setArgs(args);//请求参数
-                        dataCall.success(result);
+                            result.setArgs(args);//请求参数
+                            dataCall.success(result);
 //                        }
                     }
                 }, new Consumer<Throwable>() {
