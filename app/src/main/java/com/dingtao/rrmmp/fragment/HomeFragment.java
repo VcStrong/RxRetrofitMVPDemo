@@ -163,9 +163,9 @@ public class HomeFragment extends WDFragment {
         public void success(Result<HomeList> data) {
             if (data.getStatus().equals("0000")){
                 //添加列表并刷新
-                mHotAdapter.addAll(data.getResult().getRxxp().get(0).getCommodityList());
-                mFashionAdapter.addAll(data.getResult().getMlss().get(0).getCommodityList());
-                mLifeAdapter.addAll(data.getResult().getPzsh().get(0).getCommodityList());
+                mHotAdapter.addAll(data.getResult().getRxxp().getCommodityList());
+                mFashionAdapter.addAll(data.getResult().getMlss().getCommodityList());
+                mLifeAdapter.addAll(data.getResult().getPzsh().getCommodityList());
                 mHotAdapter.notifyDataSetChanged();
                 mFashionAdapter.notifyDataSetChanged();
                 mLifeAdapter.notifyDataSetChanged();

@@ -24,6 +24,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -36,7 +37,7 @@ public abstract class BasePresenter {
     private DataCall dataCall;
 
     private boolean running;
-    private Observable observable;
+    private Disposable disposable;
 
     public BasePresenter(DataCall dataCall) {
         this.dataCall = dataCall;
@@ -50,8 +51,7 @@ public abstract class BasePresenter {
         }
 
         running = true;
-        observable = observable(args);
-        observable.compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
+        disposable = observable(args).compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
                 .compose(new ObservableTransformer() {
                     @Override
                     public ObservableSource apply(Observable upstream) {
@@ -89,8 +89,8 @@ public abstract class BasePresenter {
     }
 
     public void cancelRequest() {
-        if (observable!=null){
-            observable.unsubscribeOn(Schedulers.io());
+        if (disposable!=null){
+            disposable.dispose();
         }
     }
 
