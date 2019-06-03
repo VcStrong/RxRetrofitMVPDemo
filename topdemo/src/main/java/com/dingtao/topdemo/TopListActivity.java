@@ -39,17 +39,17 @@ public class TopListActivity extends AppCompatActivity {
 
         myAdapter = new MyAdapter();
 
-        myAdapter.add(new Car("1","速腾","100","大众汽车"));
-        myAdapter.add(new Car("2","迈腾","100","大众汽车"));
-        myAdapter.add(new Car("3","帕赛特","100","大众汽车"));
-        myAdapter.add(new Car("4","捷达","100","大众汽车"));
-        myAdapter.add(new Car("5","辉腾","100","大众汽车"));
-        myAdapter.add(new Car("20","S级","200","奔驰汽车"));
-        myAdapter.add(new Car("21","E级","200","奔驰汽车"));
-        myAdapter.add(new Car("22","C级","200","奔驰汽车"));
-        myAdapter.add(new Car("51","A3","300","奥迪汽车"));
-        myAdapter.add(new Car("52","A4L","300","奥迪汽车"));
-        myAdapter.add(new Car("53","A6L","300","奥迪汽车"));
+        myAdapter.addItem(new Car("1","速腾","100","大众汽车"));
+        myAdapter.addItem(new Car("2","迈腾","100","大众汽车"));
+        myAdapter.addItem(new Car("3","帕赛特","100","大众汽车"));
+        myAdapter.addItem(new Car("4","捷达","100","大众汽车"));
+        myAdapter.addItem(new Car("5","辉腾","100","大众汽车"));
+        myAdapter.addItem(new Car("20","S级","200","奔驰汽车"));
+        myAdapter.addItem(new Car("21","E级","200","奔驰汽车"));
+        myAdapter.addItem(new Car("22","C级","200","奔驰汽车"));
+        myAdapter.addItem(new Car("51","A3","300","奥迪汽车"));
+        myAdapter.addItem(new Car("52","A4L","300","奥迪汽车"));
+        myAdapter.addItem(new Car("53","A6L","300","奥迪汽车"));
 
         mRecyclerView.setAdapter(myAdapter);
         PowerfulStickyDecoration decoration = PowerfulStickyDecoration.Builder
