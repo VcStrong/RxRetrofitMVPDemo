@@ -1,16 +1,16 @@
 # rxjava2+retrofit2
-### 1.mvp-V1
+## 1.mvp-V1
 mvp乞丐版已知bug：请求异常会崩溃
 
-### 2.mvp-V2
+## 2.mvp-V2
 MVP-V2.0<br/>
 增加MD5,工具类，Activity和Application基类<br/>
 封装retrofit异常<br/>
 修改回调接口<br/><br/>
-- 2018-12-30<br/>
+#### 2018-12-30<br/>
 修复rxjava观察者请求结果泛型报错问题
 
-- 2019-01-04<br/>
+#### 2019-01-04<br/>
 1.免测量的ScrollView:android.support.v4.widget.NestedScrollView<br/>
 2.仿朋友圈的技术分析：<br/>
  - 测量GridView：参照ScrollView嵌套GridView<br/>
@@ -18,7 +18,7 @@ MVP-V2.0<br/>
  - 如果有多张图片，按照一定的逻辑切换Griview的列数，在循环复用的时候切换gridview的adpter在创建的时候设置上，循环复用的时候，得到adpter清空数据，添加新数据刷新<br/>
 3.页面布局关于长短页面的压盖问题<br/>
 
-- 2019-01-07<br/>
+#### 2019-01-07<br/>
 1.topdemo是顶部浮动效果（吸顶效果）测试<br/>
 ```
 引入依赖：
@@ -48,9 +48,10 @@ PowerfulStickyDecoration decoration = PowerfulStickyDecoration.Builder
 recyclerView.addItemDecoration(decoration);
 ```
 <br/>
-### 3.mvp-V3
+
+## 3.mvp-V3
 重大升级：针对公司级大项目进行框架升级，V3版本停留于单工程形式，接下来的V4版本将组件化分层（请期待）
-- 2019-06-09<br/>
+#### 2019-06-09<br/>
 注：BasePresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
 1.修复rxjava无法停止请求的问题，BP中改为Dispose对象停止访问网络；<br/>
 2.将IRquest接口每次请求都要新建的问题修复，放到Presenter构造方法中，提高对象使用率；<br/>
