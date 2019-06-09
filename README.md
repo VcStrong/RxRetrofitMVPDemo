@@ -56,11 +56,12 @@ recyclerView.addItemDecoration(decoration);
 1.修复rxjava无法停止请求的问题，BP中改为Dispose对象停止访问网络；<br/>
 2.将IRquest接口每次请求都要新建的问题修复，放到Presenter构造方法中，提高对象使用率；<br/>
 3.简化BP中异常处理类。。哈哈，抱歉，其实我学会使用Rxjava的onErrorReturn方法了，所以之前V2版本中BP异常处理就要被抛弃了<br/>
-4.重点：对BP和DataCall进行重大升级：①BP可以根据业务选择不同的请求接口，例：
+4.重点：对BP和DataCall进行重大升级：
+ - ①BP可以根据业务选择不同的请求接口，例：
 请求我们服务器用的IAppRequest，请求经纬度换算的百度接口，使用IBaiduRequest，
 Presenter层继承BP，重写getRequestType()方法用于操作NetworkManager中不同域名的Retrofit；
-②BP根据结果不同，选择不同的Consumer进行处理，这里写法比较灵活，遵循基类不能经常修改的原则，
+ - ②BP根据结果不同，选择不同的Consumer进行处理，这里写法比较灵活，遵循基类不能经常修改的原则，
 我暴露了getConsumer(Object...args)方法，你可以直接重写此方法修改Consumer用于操作返回值；
 如果某个业务的Consumer被大量用到，你可以修改BP中getConsumer方法，然后重写getResponseType()即可。
 例：我们项目接口有50个，由于和新浪微博深度合作资源共享，我们接入新浪微博的20个接口，项目用到百度定位，用了两个百度接口；
-③DataCall重写，由于某些业务需要通过请求值进行判断，这里我把请求值又回传给了页面层。<br/>
+ - ③DataCall重写，由于某些业务需要通过请求值进行判断，这里我把请求值又回传给了页面层。<br/>
