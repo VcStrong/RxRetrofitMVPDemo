@@ -29,6 +29,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
     public void addAll(List<Object> list) {
         mList.addAll(list);
     }
+    public void addStringListAll(List<String> list) {
+        mList.addAll(list);
+    }
 
     public void setSign(int sign){
         this.sign = sign;

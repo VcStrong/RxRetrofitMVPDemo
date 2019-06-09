@@ -48,37 +48,37 @@ public class RegisterActivity extends WDActivity {
     }
 
     @OnClick(R.id.register_btn)
-    public void login(){
+    public void login() {
         String m = mMobile.getText().toString();
         String p = mPas.getText().toString();
-        if (TextUtils.isEmpty(m)){
+        if (TextUtils.isEmpty(m)) {
             UIUtils.showToastSafe("请输入正确的手机号");
             return;
         }
-        if (TextUtils.isEmpty(p)){
+        if (TextUtils.isEmpty(p)) {
             UIUtils.showToastSafe("请输入密码");
             return;
         }
         mLoadDialog.show();
-        requestPresenter.reqeust(m,MD5Utils.md5(p));
+        requestPresenter.reqeust(m, MD5Utils.md5(p));
     }
 
     private boolean pasVisibile = false;
 
     @OnClick(R.id.login_pas_eye)
-    public void eyePas(){
-        if (pasVisibile){//密码显示，则隐藏
+    public void eyePas() {
+        if (pasVisibile) {//密码显示，则隐藏
             mPas.setTransformationMethod(PasswordTransformationMethod.getInstance());
             pasVisibile = false;
-        }else{//密码隐藏则显示
+        } else {//密码隐藏则显示
             mPas.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             pasVisibile = true;
         }
     }
 
     @OnClick(R.id.login_text)
-    public void remPas(){
-       finish();
+    public void remPas() {
+        finish();
     }
 
     /**
@@ -86,23 +86,19 @@ public class RegisterActivity extends WDActivity {
      * @date 2018/12/28 10:44 AM
      * 注册
      */
-    class RegisterCall implements DataCall<Result> {
+    class RegisterCall implements DataCall {
 
         @Override
-        public void success(Result result) {
+        public void success(Object result, Object... args) {
             mLoadDialog.cancel();
-            if (result.getStatus().equals("0000")){
-                UIUtils.showToastSafe("注册成功，请登录");
-                finish();
-            }else{
-                UIUtils.showToastSafe(result.getStatus()+"  "+result.getMessage());
-            }
+            UIUtils.showToastSafe("注册成功，请登录");
+            finish();
         }
 
         @Override
-        public void fail(ApiException e) {
+        public void fail(ApiException e, Object... arg) {
             mLoadDialog.cancel();
-            UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
+            UIUtils.showToastSafe(e.getCode() + " " + e.getDisplayMessage());
         }
     }
 }

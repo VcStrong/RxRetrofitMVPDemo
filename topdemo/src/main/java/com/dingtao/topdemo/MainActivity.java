@@ -43,10 +43,10 @@ import butterknife.OnClick;
 public class MainActivity extends DTActivity {
 
     @BindView(R.id.text)
-    private TextView mHtmlText;
+    TextView mHtmlText;
 
     @BindView(R.id.edittext)
-    private EditText mEdit;
+    EditText mEdit;
 
     @Override
     protected void initView() {

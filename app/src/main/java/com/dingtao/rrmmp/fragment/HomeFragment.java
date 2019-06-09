@@ -47,7 +47,7 @@ public class HomeFragment extends WDFragment {
     @BindView(R.id.life_list)
     RecyclerView mLifeList;
 
-    private CommodityAdpater mHotAdapter,mFashionAdapter,mLifeAdapter;
+    private CommodityAdpater mHotAdapter, mFashionAdapter, mLifeAdapter;
 
     BannerPresenter bannerPresenter;
     HomeListPresenter homeListPresenter;
@@ -65,13 +65,13 @@ public class HomeFragment extends WDFragment {
     @Override
     protected void initView() {
 
-        mHotAdapter = new CommodityAdpater(getContext(),CommodityAdpater.HOT_TYPE);
-        mFashionAdapter = new CommodityAdpater(getContext(),CommodityAdpater.FASHION_TYPE);
-        mLifeAdapter = new CommodityAdpater(getContext(),CommodityAdpater.HOT_TYPE);
+        mHotAdapter = new CommodityAdpater(getContext(), CommodityAdpater.HOT_TYPE);
+        mFashionAdapter = new CommodityAdpater(getContext(), CommodityAdpater.FASHION_TYPE);
+        mLifeAdapter = new CommodityAdpater(getContext(), CommodityAdpater.HOT_TYPE);
 
-        mHotList.setLayoutManager(new GridLayoutManager(getContext(),3));
-        mFashionList.setLayoutManager(new GridLayoutManager(getContext(),1));
-        mLifeList.setLayoutManager(new GridLayoutManager(getContext(),2));
+        mHotList.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mFashionList.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        mLifeList.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         int space = getResources().getDimensionPixelSize(R.dimen.dip_10);
 
@@ -110,10 +110,11 @@ public class HomeFragment extends WDFragment {
      */
     class BannerViewHolder implements MZViewHolder<Banner> {
         private SimpleDraweeView mImageView;
+
         @Override
         public View createView(Context context) {
             // 返回页面布局
-            View view = LayoutInflater.from(context).inflate(R.layout.banner_item,null);
+            View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
             mImageView = view.findViewById(R.id.banner_image);
             return view;
         }
@@ -130,24 +131,22 @@ public class HomeFragment extends WDFragment {
      * @date 2019/1/3 9:23 AM
      * banner回调接口
      */
-    class MyBanner implements DataCall<Result<List<Banner>>>{
+    class MyBanner implements DataCall<List<Banner>> {
 
         @Override
-        public void success(Result<List<Banner>> data) {
-            if (data.getStatus().equals("0000")){
-                mMZBanner.setIndicatorVisible(false);
-                mMZBanner.setPages(data.getResult(), new MZHolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new BannerViewHolder();
-                    }
-                });
-                mMZBanner.start();
-            }
+        public void success(List<Banner> data,Object...args) {
+            mMZBanner.setIndicatorVisible(false);
+            mMZBanner.setPages(data, new MZHolderCreator<BannerViewHolder>() {
+                @Override
+                public BannerViewHolder createViewHolder() {
+                    return new BannerViewHolder();
+                }
+            });
+            mMZBanner.start();
         }
 
         @Override
-        public void fail(ApiException e) {
+        public void fail(ApiException e,Object...args) {
 
         }
     }
@@ -157,23 +156,21 @@ public class HomeFragment extends WDFragment {
      * @date 2019/1/3 9:23 AM
      * banner回调接口
      */
-    class HomeCall implements DataCall<Result<HomeList>>{
+    class HomeCall implements DataCall<HomeList> {
 
         @Override
-        public void success(Result<HomeList> data) {
-            if (data.getStatus().equals("0000")){
-                //添加列表并刷新
-                mHotAdapter.addAll(data.getResult().getRxxp().getCommodityList());
-                mFashionAdapter.addAll(data.getResult().getMlss().getCommodityList());
-                mLifeAdapter.addAll(data.getResult().getPzsh().getCommodityList());
-                mHotAdapter.notifyDataSetChanged();
-                mFashionAdapter.notifyDataSetChanged();
-                mLifeAdapter.notifyDataSetChanged();
-            }
+        public void success(HomeList data, Object... args) {
+            //添加列表并刷新
+            mHotAdapter.addAll(data.getRxxp().getCommodityList());
+            mFashionAdapter.addAll(data.getMlss().getCommodityList());
+            mLifeAdapter.addAll(data.getPzsh().getCommodityList());
+            mHotAdapter.notifyDataSetChanged();
+            mFashionAdapter.notifyDataSetChanged();
+            mLifeAdapter.notifyDataSetChanged();
         }
 
         @Override
-        public void fail(ApiException e) {
+        public void fail(ApiException e, Object... args) {
 
         }
     }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.adapter.ImageAdapter;
+import com.dingtao.rrmmp.bean.Circle;
 import com.dingtao.rrmmp.bean.Result;
 import com.dingtao.rrmmp.core.DataCall;
 import com.dingtao.rrmmp.core.WDActivity;
@@ -25,6 +26,7 @@ import com.dingtao.rrmmp.util.UIUtils;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,7 +37,7 @@ import butterknife.OnItemClick;
  * @date 2019/1/11 00:22
  * qq:1940870847
  */
-public class AddCircleActivity extends WDActivity implements DataCall<Result> {
+public class AddCircleActivity extends WDActivity implements DataCall<Circle> {
 
     @BindView(R.id.bo_text)
     EditText mText;
@@ -99,17 +101,13 @@ public class AddCircleActivity extends WDActivity implements DataCall<Result> {
     }
 
     @Override
-    public void success(Result data) {
-        if (data.getStatus().equals("0000")){
-            CircleFragment.addCircle = true;
-            finish();
-        }else{
-            UIUtils.showToastSafe(data.getStatus()+"  "+data.getMessage());
-        }
+    public void success(Circle data,Object...args) {
+        CircleFragment.addCircle = true;
+        finish();
     }
 
     @Override
-    public void fail(ApiException e) {
+    public void fail(ApiException e,Object...args) {
         UIUtils.showToastSafe(e.getCode()+"  "+e.getDisplayMessage());
     }
 }

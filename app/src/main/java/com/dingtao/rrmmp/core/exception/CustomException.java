@@ -20,22 +20,22 @@ public class CustomException {
     /**
      * 未知错误
      */
-    public static final int UNKNOWN = 1000;
+    public static final String UNKNOWN = "1000";
 
     /**
      * 解析错误
      */
-    public static final int PARSE_ERROR = 1001;
+    public static final String PARSE_ERROR = "1001";
 
     /**
      * 网络错误
      */
-    public static final int NETWORK_ERROR = 1002;
+    public static final String NETWORK_ERROR = "1002";
 
     /**
      * 协议错误
      */
-    public static final int HTTP_ERROR = 1003;
+    public static final String HTTP_ERROR = "1003";
 
     /**
      * 处理系统异常，封装成ApiException

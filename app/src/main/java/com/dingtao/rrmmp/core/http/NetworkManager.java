@@ -2,6 +2,7 @@ package com.dingtao.rrmmp.core.http;
 
 import com.dingtao.rrmmp.bean.UserInfo;
 import com.dingtao.rrmmp.core.WDApplication;
+import com.dingtao.rrmmp.core.WDPresenter;
 import com.dingtao.rrmmp.core.db.DaoMaster;
 import com.dingtao.rrmmp.core.db.UserInfoDao;
 
@@ -26,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkManager {
 
     private static NetworkManager instance;
-    private Retrofit retrofit;
+    private Retrofit app_retrofit,baidu_retrofit;
 
     private NetworkManager(){
         init();
@@ -63,7 +64,16 @@ public class NetworkManager {
                 .readTimeout(5,TimeUnit.SECONDS)
                 .build();
 
-        retrofit = new Retrofit.Builder()
+        app_retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+//                .baseUrl("http://169.254.101.220:8080/")//base_url:http+域名
+//                .baseUrl("http://172.17.8.100/small/")//base_url:http+域名
+                .baseUrl("http://mobile.bwstudent.com/small/")//base_url:http+域名
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用Rxjava对回调数据进行处理
+                .addConverterFactory(GsonConverterFactory.create())//响应结果的解析器，包含gson，xml，protobuf
+                .build();
+
+        baidu_retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
 //                .baseUrl("http://169.254.101.220:8080/")//base_url:http+域名
 //                .baseUrl("http://172.17.8.100/small/")//base_url:http+域名
@@ -73,8 +83,11 @@ public class NetworkManager {
                 .build();
     }
 
-    public <T> T create(final Class<T> service){
-        return retrofit.create(service);
+    public <T> T create(int requestType ,final Class<T> service){
+        if (requestType == WDPresenter.REQUEST_TYPE_SDK_BD){//如果请求百度SDK的接口
+            return baidu_retrofit.create(service);
+        }
+        return app_retrofit.create(service);
     }
 
 }

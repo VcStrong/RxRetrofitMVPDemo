@@ -9,7 +9,7 @@ import com.dingtao.rrmmp.core.exception.ApiException;
  */
 public interface DataCall<T> {
 
-    void success(T data);
-    void fail(ApiException e);
+    void success(T data,Object...args);
+    void fail(ApiException data, Object...args);
 
 }

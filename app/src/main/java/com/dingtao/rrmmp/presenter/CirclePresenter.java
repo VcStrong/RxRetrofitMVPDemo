@@ -1,8 +1,8 @@
 package com.dingtao.rrmmp.presenter;
 
+import com.dingtao.rrmmp.core.WDPresenter;
 import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.http.IRequest;
-import com.dingtao.rrmmp.core.http.NetworkManager;
+import com.dingtao.rrmmp.core.http.IAppRequest;
 
 import io.reactivex.Observable;
 
@@ -11,7 +11,7 @@ import io.reactivex.Observable;
  * @date 2018/12/28 11:23
  * qq:1940870847
  */
-public class CirclePresenter extends BasePresenter {
+public class CirclePresenter extends WDPresenter<IAppRequest> {
 
     private int page=1;
 
@@ -24,8 +24,7 @@ public class CirclePresenter extends BasePresenter {
     }
 
     @Override
-    protected Observable observable(Object... args) {
-        IRequest iRequest = NetworkManager.instance().create(IRequest.class);
+    protected Observable getModel(Object... args) {
         boolean refresh = (boolean)args[0];
         if (refresh){
             page = 1;

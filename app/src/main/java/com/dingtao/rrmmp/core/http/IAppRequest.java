@@ -6,32 +6,26 @@ import com.dingtao.rrmmp.bean.Result;
 import com.dingtao.rrmmp.bean.UserInfo;
 import com.dingtao.rrmmp.bean.shop.HomeList;
 
-import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Streaming;
 
 /**
  * @author dingtao
  * @date 2018/12/28 10:00
  * qq:1940870847
  */
-public interface IRequest {
+public interface IAppRequest {
 
     @FormUrlEncoded
     @POST("user/v1/register")
@@ -59,9 +53,9 @@ public interface IRequest {
     @GET("circle/v1/findCircleList")
     Observable<Result<List<Circle>>> findCircleList(
             @Header("userId") long userId,
-            @Header("sessionId")String sessionId,
-            @Query("page")int page,
-            @Query("count")int count);
+            @Header("sessionId") String sessionId,
+            @Query("page") int page,
+            @Query("count") int count);
 
     /**
      * 圈子
@@ -80,7 +74,7 @@ public interface IRequest {
     @POST("circle/verify/v1/addCircleGreat")
     Observable<Result> addCircleGreat(
             @Header("userId") String userId,
-            @Header("sessionId")String sessionId,
+            @Header("sessionId") String sessionId,
             @Field("circleId") long circleId);
 
     /**
@@ -89,9 +83,9 @@ public interface IRequest {
     @GET("commodity/verify/v1/browseList")
     Observable<Result<List<Banner>>> browseList(
             @Header("userId") String userId,
-            @Header("sessionId")String sessionId,
-            @Query("page")int page,
-            @Query("count")int count);
+            @Header("sessionId") String sessionId,
+            @Query("page") int page,
+            @Query("count") int count);
 
     /**
      * 同步购物车数据
@@ -99,7 +93,7 @@ public interface IRequest {
     @PUT("order/verify/v1/syncShoppingCart")
     Observable<Result> syncShoppingCart(
             @Header("userId") String userId,
-            @Header("sessionId")String sessionId,
+            @Header("sessionId") String sessionId,
             @Body String data);
 
     /**
@@ -107,6 +101,6 @@ public interface IRequest {
      */
     @POST("circle/verify/v1/releaseCircle")
     Observable<Result> releaseCircle(@Header("userId") long userId,
-                                     @Header("sessionId")String sessionId,
+                                     @Header("sessionId") String sessionId,
                                      @Body MultipartBody body);
 }

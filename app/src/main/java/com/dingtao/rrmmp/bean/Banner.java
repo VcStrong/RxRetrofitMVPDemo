@@ -18,30 +18,6 @@ public class Banner {
     int rank;
     String title;
 
-    BigDecimal value;
-    Context context;
-
-    public Banner with(Context context){
-//        this.context = context;
-//        File file = new File("/a/a");
-//        file.mkdirs()//创建文件夹
-        return this;
-    }
-
-    public Banner load(String url){
-//        URLConnection urlConnection = new ().u
-        //网络请求
-        return this;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }

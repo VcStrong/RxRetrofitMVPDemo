@@ -13,14 +13,9 @@ public class Result<T> {
     T result;
     String headPath;
 
-    Object[] args;
-
-    public void setArgs(Object[] args) {
-        this.args = args;
-    }
-
-    public Object[] getArgs() {
-        return args;
+    public Result(String status, String message) {
+        this.status = status;
+        this.message = message;
     }
 
     public String getStatus() {

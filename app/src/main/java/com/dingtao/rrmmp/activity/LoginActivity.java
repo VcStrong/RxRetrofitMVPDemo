@@ -61,7 +61,7 @@ public class LoginActivity extends WDActivity {
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
             EasyPermissions.requestPermissions(this,
-                    "发布图片",10,
+                    "发布图片", 10,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE});
         }
@@ -139,27 +139,23 @@ public class LoginActivity extends WDActivity {
      * @date 2018/12/28 10:44 AM
      * 登录
      */
-    class LoginCall implements DataCall<Result<UserInfo>> {
+    class LoginCall implements DataCall<UserInfo> {
 
         @Override
-        public void success(Result<UserInfo> result) {
+        public void success(UserInfo result, Object... args) {
             mLoadDialog.cancel();
-            if (result.getStatus().equals("0000")) {
-                result.getResult().setStatus(1);//设置登录状态，保存到数据库
-                UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
-                userInfoDao.insertOrReplace(result.getResult());
-                intent(MainActivity.class);
-                finish();
-            } else {
-                UIUtils.showToastSafe(result.getStatus() + "  " + result.getMessage());
-            }
+            result.setStatus(1);//设置登录状态，保存到数据库
+            UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
+            userInfoDao.insertOrReplace(result);
+            intent(MainActivity.class);
+            finish();
             //result.getData().setStatus(1);设置用户登录状态为1
             //userdao.insertOrReplace(result.getData());保存用户数据
             //跳转页面
         }
 
         @Override
-        public void fail(ApiException e) {
+        public void fail(ApiException e, Object... args) {
             mLoadDialog.cancel();
             UIUtils.showToastSafe(e.getCode() + " " + e.getDisplayMessage());
         }

@@ -89,7 +89,7 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
 //            for (int i = 0; i <imageCount ; i++) {
 //                myHolder.imageAdapter.addAll(Arrays.asList(images));
 //            }
-            myHolder.imageAdapter.addAll(Arrays.asList(images));
+            myHolder.imageAdapter.addStringListAll(Arrays.asList(images));
             myHolder.gridLayoutManager.setSpanCount(colNum);//设置列数
 
 
