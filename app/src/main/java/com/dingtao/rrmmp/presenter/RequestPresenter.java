@@ -1,8 +1,8 @@
 package com.dingtao.rrmmp.presenter;
 
-import com.dingtao.rrmmp.core.WDPresenter;
-import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.http.IAppRequest;
+import com.dingtao.common.core.WDPresenter;
+import com.dingtao.common.core.DataCall;
+import com.dingtao.common.core.http.IAppRequest;
 
 import io.reactivex.Observable;
 

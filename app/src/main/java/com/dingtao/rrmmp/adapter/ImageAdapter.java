@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.core.WDActivity;
-import com.dingtao.rrmmp.util.UIUtils;
+import com.dingtao.common.core.WDActivity;
+import com.dingtao.common.util.UIUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHodler> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHodler myHodler, int position) {
+    public void onBindViewHolder(@NonNull MyHodler myHodler, final int position) {
         if (mList.get(position) instanceof String) {
             String imageUrl = (String) mList.get(position);
             if (imageUrl.contains("http:")) {//加载http

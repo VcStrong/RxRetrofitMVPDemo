@@ -3,9 +3,9 @@ package com.dingtao.rrmmp.activity;
 import android.content.Intent;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.core.WDActivity;
-import com.dingtao.rrmmp.core.db.DaoMaster;
-import com.dingtao.rrmmp.core.db.UserInfoDao;
+import com.dingtao.common.core.WDActivity;
+import com.dingtao.common.core.db.DaoMaster;
+import com.dingtao.common.core.db.UserInfoDao;
 
 import butterknife.OnClick;
 

@@ -12,17 +12,17 @@ import android.widget.ImageView;
 
 import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.adapter.ImageAdapter;
-import com.dingtao.rrmmp.bean.Circle;
-import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.WDActivity;
-import com.dingtao.rrmmp.core.exception.ApiException;
+import com.dingtao.common.bean.Circle;
+import com.dingtao.common.bean.Result;
+import com.dingtao.common.core.DataCall;
+import com.dingtao.common.core.WDActivity;
+import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.fragment.CircleFragment;
 import com.dingtao.rrmmp.presenter.PublishCirclePresenter;
-import com.dingtao.rrmmp.util.DateUtils;
-import com.dingtao.rrmmp.util.FileUtils;
-import com.dingtao.rrmmp.util.StringUtils;
-import com.dingtao.rrmmp.util.UIUtils;
+import com.dingtao.common.util.DateUtils;
+import com.dingtao.common.util.FileUtils;
+import com.dingtao.common.util.StringUtils;
+import com.dingtao.common.util.UIUtils;
 
 import java.io.File;
 import java.util.Date;

@@ -10,15 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.WDActivity;
-import com.dingtao.rrmmp.core.WDApplication;
-import com.dingtao.rrmmp.core.exception.ApiException;
+import com.dingtao.common.bean.Result;
+import com.dingtao.common.core.DataCall;
+import com.dingtao.common.core.WDActivity;
+import com.dingtao.common.core.WDApplication;
+import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.LoginPresenter;
 import com.dingtao.rrmmp.presenter.RegisterPresenter;
 import com.dingtao.rrmmp.util.MD5Utils;
-import com.dingtao.rrmmp.util.UIUtils;
+import com.dingtao.common.util.UIUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

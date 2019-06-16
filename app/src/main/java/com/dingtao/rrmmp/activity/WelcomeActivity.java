@@ -6,7 +6,7 @@ import android.os.Message;
 import android.widget.TextView;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.core.WDActivity;
+import com.dingtao.common.core.WDActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

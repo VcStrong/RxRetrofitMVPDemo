@@ -1,1 +1,1 @@
-include ':app', ':xlistview', ':topdemo'
+include ':app', ':topdemo', ':common', ':open_login'

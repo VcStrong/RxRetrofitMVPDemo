@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.bean.shop.Commodity;
+import com.dingtao.common.bean.shop.Commodity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;

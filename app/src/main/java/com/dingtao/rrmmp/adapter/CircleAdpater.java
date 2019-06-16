@@ -12,14 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.bean.Circle;
-import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.exception.ApiException;
+import com.dingtao.common.bean.Circle;
+import com.dingtao.common.bean.Result;
+import com.dingtao.common.core.DataCall;
+import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.presenter.GreatPresenter;
-import com.dingtao.rrmmp.util.DateUtils;
-import com.dingtao.rrmmp.util.StringUtils;
-import com.dingtao.rrmmp.util.recyclerview.SpacingItemDecoration;
+import com.dingtao.common.util.DateUtils;
+import com.dingtao.common.util.StringUtils;
+import com.dingtao.common.util.recyclerview.SpacingItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.ParseException;
@@ -57,8 +57,8 @@ public class CircleAdpater extends RecyclerView.Adapter<CircleAdpater.MyHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder myHolder, int position) {
-        Circle circle = list.get(position);
+    public void onBindViewHolder(@NonNull MyHolder myHolder, final int position) {
+        final Circle circle = list.get(position);
         myHolder.avatar.setImageURI(Uri.parse(circle.getHeadPic()));
         myHolder.nickname.setText(circle.getNickName());
         try {

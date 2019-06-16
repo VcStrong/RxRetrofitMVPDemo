@@ -1,9 +1,8 @@
 package com.dingtao.rrmmp.presenter;
 
-import com.dingtao.rrmmp.core.WDPresenter;
-import com.dingtao.rrmmp.core.DataCall;
-import com.dingtao.rrmmp.core.http.IAppRequest;
-
+import com.dingtao.common.core.WDPresenter;
+import com.dingtao.common.core.DataCall;
+import com.dingtao.common.core.http.IAppRequest;
 import java.io.File;
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class PublishCirclePresenter extends WDPresenter<IAppRequest> {
     @Override
     protected Observable getModel(Object... args) {
 
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
         builder.addFormDataPart("content", (String)args[3]);
         builder.addFormDataPart("commodityId", "1");
         List<Object> list = (List<Object>) args[4];

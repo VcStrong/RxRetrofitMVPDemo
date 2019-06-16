@@ -5,12 +5,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
 import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.bean.Result;
-import com.dingtao.rrmmp.core.WDActivity;
+import com.dingtao.common.bean.Result;
+import com.dingtao.common.core.WDActivity;
 import com.dingtao.rrmmp.fragment.CircleFragment;
 import com.dingtao.rrmmp.fragment.HomeFragment;
 import com.dingtao.rrmmp.fragment.MeFragment;
-import com.dingtao.rrmmp.util.UIUtils;
+import com.dingtao.common.util.UIUtils;
 
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
