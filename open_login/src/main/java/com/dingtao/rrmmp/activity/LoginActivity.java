@@ -1,7 +1,7 @@
 package com.dingtao.rrmmp.activity;
 
 import android.Manifest;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dingtao.common.bean.Result;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dingtao.common.bean.UserInfo;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.WDActivity;
@@ -17,6 +17,8 @@ import com.dingtao.common.core.WDApplication;
 import com.dingtao.common.core.db.DaoMaster;
 import com.dingtao.common.core.db.UserInfoDao;
 import com.dingtao.common.core.exception.ApiException;
+import com.dingtao.common.util.Constant;
+import com.dingtao.rrmmp.R;
 import com.dingtao.rrmmp.R2;
 import com.dingtao.rrmmp.presenter.LoginPresenter;
 import com.dingtao.rrmmp.util.MD5Utils;
@@ -26,6 +28,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
+@Route(path = Constant.ACTIVITY_URL_LOGIN)
 public class LoginActivity extends WDActivity {
 
     LoginPresenter requestPresenter;
@@ -40,7 +43,7 @@ public class LoginActivity extends WDActivity {
 
     @Override
     protected int getLayoutId() {
-        return R2.layout.activity_login;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -130,7 +133,7 @@ public class LoginActivity extends WDActivity {
 
     @OnClick(R2.id.register_text)
     public void register() {
-//        intent(RegisterActivity.class);
+        intentByRouter(Constant.ACTIVITY_URL_REGISTER);
     }
 
 
@@ -146,12 +149,9 @@ public class LoginActivity extends WDActivity {
             mLoadDialog.cancel();
             result.setStatus(1);//设置登录状态，保存到数据库
             UserInfoDao userInfoDao = DaoMaster.newDevSession(getBaseContext(), UserInfoDao.TABLENAME).getUserInfoDao();
-            userInfoDao.insertOrReplace(result);
-//            intent(MainActivity.class);
+            userInfoDao.insertOrReplace(result);//保存用户数据
+            intentByRouter(Constant.ACTIVITY_URL_MAIN);
             finish();
-            //result.getData().setStatus(1);设置用户登录状态为1
-            //userdao.insertOrReplace(result.getData());保存用户数据
-            //跳转页面
         }
 
         @Override

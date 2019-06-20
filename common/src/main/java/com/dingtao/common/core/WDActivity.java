@@ -9,15 +9,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingtao.common.bean.UserInfo;
 import com.dingtao.common.core.db.DaoMaster;
 import com.dingtao.common.core.db.UserInfoDao;
 import com.dingtao.common.util.LogUtils;
-
-import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
@@ -54,6 +53,7 @@ public abstract class WDActivity extends AppCompatActivity {
         LogUtils.e("getTaskId = " + getTaskId());
         initLoad();
         setContentView(getLayoutId());
+        ARouter.getInstance().inject(this);
         ButterKnife.bind(this);//绑定布局
         initView();
     }
@@ -84,6 +84,14 @@ public abstract class WDActivity extends AppCompatActivity {
     }
 
     /**
+     * @param path 传送Activity的
+     */
+    public void intentByRouter(String path) {
+        ARouter.getInstance().build(path)
+                .navigation(this);
+    }
+
+    /**
      * @param mActivity 传送Activity的
      * @param bundle
      */
@@ -91,6 +99,16 @@ public abstract class WDActivity extends AppCompatActivity {
         Intent intent = new Intent(this, mActivity);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    /**
+     * @param path 传送Activity的
+     * @param bundle
+     */
+    public void intentByRouter(String path, Bundle bundle) {
+        ARouter.getInstance().build(path)
+                .with(bundle)
+                .navigation(this);
     }
 
     /**

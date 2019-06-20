@@ -1,14 +1,16 @@
 package com.dingtao.common.core;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingtao.common.bean.UserInfo;
 import com.dingtao.common.core.db.DaoMaster;
 import com.dingtao.common.core.db.UserInfoDao;
 import com.dingtao.common.util.LogUtils;
 import com.google.gson.Gson;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,7 @@ public abstract class WDFragment extends Fragment {
 		// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
 		long time = System.currentTimeMillis();
 		View view = inflater.inflate(getLayoutId(),container,false);
+		ARouter.getInstance().inject(this);
 		unbinder = ButterKnife.bind(this,view);
 		initView();
 		LogUtils.e(this.toString()+"页面加载使用："+(System.currentTimeMillis()-time));
@@ -75,4 +78,41 @@ public abstract class WDFragment extends Fragment {
 	 * 初始化视图
 	 */
 	protected abstract void initView();
+
+	/**
+	 * @param mActivity 传送Activity的
+	 */
+	public void intent(Class mActivity) {
+		Intent intent = new Intent(getContext(), mActivity);
+		startActivity(intent);
+	}
+
+	/**
+	 * @param path 传送Activity的
+	 */
+	public void intentByRouter(String path) {
+		ARouter.getInstance().build(path)
+				.navigation(getContext());
+	}
+
+	/**
+	 * @param mActivity 传送Activity的
+	 * @param bundle
+	 */
+	public void intent(Class mActivity, Bundle bundle) {
+		Intent intent = new Intent(getContext(), mActivity);
+		intent.putExtras(bundle);
+		startActivity(intent);
+	}
+
+	/**
+	 * @param path 传送Activity的
+	 * @param bundle
+	 */
+	public void intentByRouter(String path, Bundle bundle) {
+		ARouter.getInstance().build(path)
+				.with(bundle)
+				.navigation(getContext());
+	}
+
 }

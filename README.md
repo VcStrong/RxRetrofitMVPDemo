@@ -65,3 +65,18 @@ Presenter层继承BP，重写getRequestType()方法用于操作NetworkManager中
 如果某个业务的Consumer被大量用到，你可以修改BP中getConsumer方法，然后重写getResponseType()即可。
 例：我们项目接口有50个，由于和新浪微博深度合作资源共享，我们接入新浪微博的20个接口，项目用到百度定位，用了两个百度接口；
  - ③DataCall重写，由于某些业务需要通过请求值进行判断，这里我把请求值又回传给了页面层。<br/>
+ 
+## 4.mvp-V4
+重大升级：组件化MVP框架，应对多业务多小组大项目开发<br/>
+1.ButterKnife使用，子module中的build.gradle必须包含：
+```
+apply plugin: 'com.jakewharton.butterknife'
+
+annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+```
+
+ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的某一个Activity代码你都会发现，@BindView使用了R2（R2只适用于ButterKnife自己的类使用），
+但是方法中所有资源使用R，这个坑很恶心的。<br/>
+2.Arouter的引入和使用，网上博客千千万，最好参照github:https://github.com/alibaba/ARouter;
+3.暂时没有要普及的了，感谢自己。
+

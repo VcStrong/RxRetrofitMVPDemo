@@ -1,1 +1,1 @@
-include ':app', ':topdemo', ':common', ':open_login'
+include ':app', ':topdemo', ':common', ':open_login', ':open_main'

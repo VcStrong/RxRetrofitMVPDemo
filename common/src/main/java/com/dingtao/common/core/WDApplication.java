@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -55,10 +56,20 @@ public class WDApplication extends Application {
         mMainLooper = getMainLooper();
         sharedPreferences = getSharedPreferences("share.xml", MODE_PRIVATE);
 
+        ARouter.openLog();     // Print log
+        ARouter.openDebug();
+        ARouter.init(this);//阿里路由初始化
+
         Fresco.initialize(this,getConfigureCaches(this));//图片加载框架初始化
         //定位
         //推送
         //统计
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ARouter.getInstance().destroy();
     }
 
     public static SharedPreferences getShare() {
