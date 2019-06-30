@@ -31,6 +31,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 @Route(path = Constant.ACTIVITY_URL_LOGIN)
 public class LoginActivity extends WDActivity {
 
+
     LoginPresenter requestPresenter;
     @BindView(R2.id.login_mobile)
     EditText mMobile;
