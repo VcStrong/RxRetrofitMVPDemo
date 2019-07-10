@@ -50,6 +50,7 @@ recyclerView.addItemDecoration(decoration);
 <br/>
 
 ## 3.mvp-V3
+TopDemo可视情况移除<br/>
 重大升级：针对公司级大项目进行框架升级，V3版本停留于单工程形式，接下来的V4版本将组件化分层（请期待）
 #### 2019-06-09<br/>
 注：BasePresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
@@ -67,6 +68,7 @@ Presenter层继承BP，重写getRequestType()方法用于操作NetworkManager中
  - ③DataCall重写，由于某些业务需要通过请求值进行判断，这里我把请求值又回传给了页面层。<br/>
  
 ## 4.mvp-V4
+TopDemo已经移除<br/>
 重大升级：组件化MVP框架，应对多业务多小组大项目开发<br/>
 1.ButterKnife使用，子module中的build.gradle必须包含：
 ```
@@ -78,5 +80,6 @@ annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的某一个Activity代码你都会发现，@BindView使用了R2（R2只适用于ButterKnife自己的类使用），
 但是方法中所有资源使用R，这个坑很恶心的。<br/>
 2.Arouter的引入和使用，网上博客千千万，最好参照github:https://github.com/alibaba/ARouter;<br/>
-3.暂时没有要普及的了，感谢自己。
+3.v4使用androidX，替换了appcompat.support，因为ButterKnife10.*之后使用了androidX。<br/>
+4.暂时没有要普及的了，感谢自己。
 
