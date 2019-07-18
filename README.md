@@ -1,12 +1,11 @@
 # rxjava2+retrofit2
 
 <figure class="third">
-<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/1.jpg" width="300" align=center />
-<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/2.jpg" width="300" align=center />
-<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/3.jpg" width="300" align=center />
+<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/1.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/2.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/3.jpg" width="300" align=center />
 </figure>
 <br/>
 <br/>
+
 ## 1.mvp-V1
 mvp乞丐版已知bug：请求异常会崩溃
 
