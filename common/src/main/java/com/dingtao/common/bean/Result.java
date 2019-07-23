@@ -1,5 +1,7 @@
 package com.dingtao.common.bean;
 
+import com.dingtao.common.core.WDResult;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  * @date 2018/12/28 10:05
  * qq:1940870847
  */
-public class Result<T> {
+public class Result<T> extends WDResult {
     String status;
     String message;
     T result;

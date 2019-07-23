@@ -1,11 +1,13 @@
 package com.dingtao.common.bean;
 
+import com.dingtao.common.core.WDResult;
+
 /**
  * @author dingtao
  * @date 2018/12/28 10:05
  * qq:1940870847
  */
-public class BDResult<T> {
+public class BDResult<T> extends WDResult {
     int code;
     String msg;
     T data;
