@@ -1,4 +1,12 @@
 # rxjava2+retrofit2
+
+
+<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/1.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/2.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/3.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/4.jpg" width="300" align=center />
+<br/>
+<br/>
+
+kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
+
 ## 1.mvp-V1
 mvp乞丐版已知bug：请求异常会崩溃
 
@@ -53,7 +61,7 @@ recyclerView.addItemDecoration(decoration);
 TopDemo可视情况移除<br/>
 重大升级：针对公司级大项目进行框架升级，V3版本停留于单工程形式，接下来的V4版本将组件化分层（请期待）
 #### 2019-06-09<br/>
-注：BasePresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
+注：WDPresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
 1.修复rxjava无法停止请求的问题，BP中改为Dispose对象停止访问网络；<br/>
 2.将IRquest接口每次请求都要新建的问题修复，放到Presenter构造方法中，提高对象使用率；<br/>
 3.简化BP中异常处理类。。哈哈，抱歉，其实我学会使用Rxjava的onErrorReturn方法了，所以之前V2版本中BP异常处理就要被抛弃了<br/>
@@ -82,4 +90,20 @@ ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的
 2.Arouter的引入和使用，网上博客千千万，最好参照github:https://github.com/alibaba/ARouter;<br/>
 3.v4使用androidX，替换了appcompat.support，因为ButterKnife10.*之后使用了androidX。<br/>
 4.暂时没有要普及的了，感谢自己。
+
+## 2019-07-18 最终版总结
+注：WDPresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
+1.BP中实现了模块的请求切换和结果统一封装回调，继承BP之后只需要写业务逻辑和调用请求，参见任意*Presenter <br/>
+2.建议每个模块加入自己的请求接口，参照common包中的IAppRequest <br/>
+3.业务上包含：登录，退出登录，上传多图，recyclerview仿朋友圈列表<br/>
+
+### 框架包含以下
+- androidx：这个系列的jar包和appcompat.support对立的，参见谷歌官方文档
+- retrofit2+rxjava2
+- greendao：数据库如果要加密，请配合SqlCipher使用，参见：https://blog.csdn.net/VcStrong/article/details/82972043
+- MZBanner：banner如果不需要刻意去掉。
+- fresco：图片加载
+- xRecyclerView
+- easypermissions：权限申请比较好用
+- Arouter
 
