@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dingtao.rrmmp.R;
+import com.dingtao.rrmmp.main.R;
 import com.dingtao.common.bean.shop.Commodity;
 import com.facebook.drawee.view.SimpleDraweeView;
 

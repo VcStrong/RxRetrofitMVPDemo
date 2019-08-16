@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.R2;
+import com.dingtao.rrmmp.main.R;
+import com.dingtao.rrmmp.main.R2;
 import com.dingtao.rrmmp.adapter.CommodityAdpater;
 import com.dingtao.common.bean.Banner;
 import com.dingtao.common.bean.shop.HomeList;

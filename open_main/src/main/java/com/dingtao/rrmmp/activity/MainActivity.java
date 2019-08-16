@@ -6,8 +6,8 @@ import android.widget.RadioGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dingtao.common.util.Constant;
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.R2;
+import com.dingtao.rrmmp.main.R;
+import com.dingtao.rrmmp.main.R2;
 import com.dingtao.common.core.WDActivity;
 import com.dingtao.rrmmp.fragment.CircleFragment;
 import com.dingtao.rrmmp.fragment.HomeFragment;
