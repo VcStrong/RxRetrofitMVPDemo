@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dingtao.rrmmp.R;
+import com.dingtao.rrmmp.main.R;
 import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.util.UIUtils;
 import com.facebook.drawee.view.SimpleDraweeView;

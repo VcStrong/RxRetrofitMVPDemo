@@ -5,7 +5,7 @@ package com.dingtao.common.bean;
  * @date 2018/12/28 10:05
  * qq:1940870847
  */
-public class Result<T> {
+public class Result<T>  {
     String status;
     String message;
     T result;

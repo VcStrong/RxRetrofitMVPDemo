@@ -6,8 +6,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dingtao.common.util.Constant;
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.R2;
+import com.dingtao.rrmmp.main.R;
+import com.dingtao.rrmmp.main.R2;
 import com.dingtao.rrmmp.activity.SetActivity;
 import com.dingtao.rrmmp.adapter.CircleAdpater;
 import com.dingtao.common.core.WDFragment;

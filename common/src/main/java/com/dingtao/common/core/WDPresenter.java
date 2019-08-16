@@ -1,5 +1,7 @@
 package com.dingtao.common.core;
 
+import android.os.Handler;
+
 import com.dingtao.common.bean.BDResult;
 import com.dingtao.common.bean.Result;
 import com.dingtao.common.core.exception.ApiException;
@@ -7,6 +9,8 @@ import com.dingtao.common.core.exception.CustomException;
 import com.dingtao.common.core.http.NetworkManager;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

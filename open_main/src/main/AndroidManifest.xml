@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.dingtao.rrmmp" >
+=======
+    package="com.dingtao.rrmmp.main" >
+>>>>>>> master
     <application>
         <activity android:name="com.dingtao.rrmmp.activity.MainActivity">
         </activity>

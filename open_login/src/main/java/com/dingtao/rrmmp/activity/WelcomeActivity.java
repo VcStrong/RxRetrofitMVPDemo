@@ -7,8 +7,8 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingtao.common.util.Constant;
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.R2;
+import com.dingtao.rrmmp.login.R;
+import com.dingtao.rrmmp.login.R2;
 import com.dingtao.common.core.WDActivity;
 
 import butterknife.BindView;

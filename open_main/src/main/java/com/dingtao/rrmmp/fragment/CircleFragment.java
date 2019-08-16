@@ -3,8 +3,8 @@ package com.dingtao.rrmmp.fragment;
 import android.content.Intent;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.R2;
+import com.dingtao.rrmmp.main.R;
+import com.dingtao.rrmmp.main.R2;
 import com.dingtao.rrmmp.activity.AddCircleActivity;
 import com.dingtao.rrmmp.adapter.CircleAdpater;
 import com.dingtao.common.bean.Circle;

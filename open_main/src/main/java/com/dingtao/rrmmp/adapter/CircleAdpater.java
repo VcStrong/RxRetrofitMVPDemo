@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dingtao.rrmmp.R;
+import com.dingtao.rrmmp.main.R;
 import com.dingtao.common.bean.Circle;
 import com.dingtao.rrmmp.presenter.GreatPresenter;
 import com.dingtao.common.util.DateUtils;
