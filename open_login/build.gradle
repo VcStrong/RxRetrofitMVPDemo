@@ -4,12 +4,12 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 28
 
-
+    compileSdkVersion projectConfig.compileSdkVersion
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion projectConfig.minSdkVersion
+        targetSdkVersion projectConfig.targetSdkVersion
+        versionCode projectConfig.versionCode
+        versionName projectConfig.versionName
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -22,6 +22,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            //组件化与继承模式使用不同的AndroidManifest文件
+            if (!allPackage) {
+                manifest.srcFile 'src/test/AndroidManifest.xml'
+            }
         }
     }
 

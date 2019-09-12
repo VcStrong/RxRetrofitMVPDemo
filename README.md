@@ -77,7 +77,7 @@ Presenter层继承BP，重写getRequestType()方法用于操作NetworkManager中
  
 ## 4.mvp-V4
 TopDemo已经移除<br/>
-重大升级：组件化MVP框架，应对多业务多小组大项目开发<br/>
+重大升级：模块化MVP框架，应对多业务多小组大项目开发<br/>
 1.ButterKnife使用，子module中的build.gradle必须包含：
 ```
 apply plugin: 'com.jakewharton.butterknife'
@@ -91,11 +91,23 @@ ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的
 3.v4使用androidX，替换了appcompat.support，因为ButterKnife10.*之后使用了androidX。<br/>
 4.暂时没有要普及的了，感谢自己。
 
-## 2019-07-18 最终版总结
+## 2019-07-18 
 注：WDPresenter以下简称BP;NetworkManager为Retrofit网络工具类<br/>
 1.BP中实现了模块的请求切换和结果统一封装回调，继承BP之后只需要写业务逻辑和调用请求，参见任意*Presenter <br/>
 2.建议每个模块加入自己的请求接口，参照common包中的IAppRequest <br/>
 3.业务上包含：登录，退出登录，上传多图，recyclerview仿朋友圈列表<br/>
+
+## 5.mvp-V5（模块组件打包） 质量的提高来自不断地追求
+由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle；<br/>
+我先总结一下网友的组件运行方案，然后说一下我的，方便各位采纳和推广我的打包方式，哈哈哈哈哈.....<br/>
+网友的方案：①根据判断修改每个module的gradle中application/library,②根据判断选择使用的AndroidManifest.xml文件;<br/>
+网友方案的优点：更改groovy变量控制打包条件，但是缺点是：不方便某几个模块联调测试，实际公司场景都是需要某几个模块业务联调完成运行。<br/>
+既然release版本是（dependencies）引入所有模块打包，那我如果根据gradle配置动态改变模块的引入，
+分分钟就能解决一个模块或者多个模块打包的问题了，而且不需要对module的类型进行任何的修改。具体方式如下：<br/>
+1.项目根目录新建了config.gradle存放系统变量；<br/>
+2.项目根目录build.gradle动态改变app（module）对模块的引入；<br/>
+3.所有选中的模块可根据自己要求看看是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets;<br/>
+注：请认真查看config.gradle中的变量备注<br/>
 
 ### 框架包含以下
 - androidx：这个系列的jar包和appcompat.support对立的，参见谷歌官方文档
