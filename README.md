@@ -109,6 +109,10 @@ ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的
 3.所有选中的模块可根据自己要求看看是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets;<br/>
 注：请认真查看config.gradle中的变量备注<br/>
 
+## 2019-10-28
+1.修改http适配文件，适配9.0系统，方便体验。
+
+
 ### 框架包含以下
 - androidx：这个系列的jar包和appcompat.support对立的，参见谷歌官方文档
 - retrofit2+rxjava2
