@@ -1,30 +1,6 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
+apply from: '../module.gradle'
 
 android {
-    compileSdkVersion 28
-
-    compileSdkVersion projectConfig.compileSdkVersion
-    defaultConfig {
-        minSdkVersion projectConfig.minSdkVersion
-        targetSdkVersion projectConfig.targetSdkVersion
-        versionCode projectConfig.versionCode
-        versionName projectConfig.versionName
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     sourceSets {
         main {
             //组件化与继承模式使用不同的AndroidManifest文件
@@ -34,11 +10,4 @@ android {
         }
     }
 
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
-    api project(path: ':common')
 }
