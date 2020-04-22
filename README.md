@@ -1,7 +1,7 @@
 # rxjava2+retrofit2
 
-
-<img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/1.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/2.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/3.jpg" width="300" align=center /><img src="https://github.com/VcStrong/KotlinMVPDemo/blob/master/image/4.jpg" width="300" align=center />
+<img src="https://img-blog.csdnimg.cn/20200421193001875.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center /> <img src="https://img-blog.csdnimg.cn/20200421193130501.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center />
+<img src="https://img-blog.csdnimg.cn/20200421193154897.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center /> <img src="https://img-blog.csdnimg.cn/20200421193208122.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center />
 <br/>
 <br/>
 
@@ -100,14 +100,24 @@ ButterKnife使用中的坑我已经帮各位踩过了，随便查看项目中的
 ## 5.mvp-V5（模块组件打包） 质量的提高来自不断地追求
 由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle；<br/>
 我先总结一下网友的组件运行方案，然后说一下我的，方便各位采纳和推广我的打包方式，哈哈哈哈哈.....<br/>
-网友的方案：①根据判断修改每个module的gradle中application/library,②根据判断选择使用的AndroidManifest.xml文件;<br/>
-网友方案的优点：更改groovy变量控制打包条件，但是缺点是：不方便某几个模块联调测试，实际公司场景都是需要某几个模块业务联调完成运行。<br/>
-既然release版本是（dependencies）引入所有模块打包，那我如果根据gradle配置动态改变模块的引入，
-分分钟就能解决一个模块或者多个模块打包的问题了，而且不需要对module的类型进行任何的修改。具体方式如下：<br/>
-1.项目根目录新建了config.gradle存放系统变量；<br/>
-2.项目根目录build.gradle动态改变app（module）对模块的引入；<br/>
-3.所有选中的模块可根据自己要求看看是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets;<br/>
-注：请认真查看config.gradle中的变量备注<br/>
+网友的方案：
+    ①. 根据判断修改每个module的gradle中application/library;
+    ②. 根据判断选择使用的AndroidManifest.xml文件;
+网友方案的优点：更改groovy变量控制打包条件；缺点：不方便某几个模块联调测试，实际公司场景都是需要某几个模块业务联调完成运行。<br/>
+
+既然release版本是（dependencies）引入所有模块打包，那我如果根据gradle配置动态改变模块的引入:
+- 公司场景：多模块业务联调，统一运行；
+- 此demo种组件化打包好处：根据gradle配置动态改变模块的引入，分分钟能解决一个模块或者多个模块打包联调；
+- 具体方式如下：
+    1. 项目根目录新建了config.gradle存放系统变量；
+    2. 项目根目录新建了module.gradle存放业务module中build.gradle公用参数，common和app不建议引入(部分重要配置必须写在这两个module中);
+    3. 项目根目录build.gradle使用groovy动态改变app（module）对模块的引入；
+    4. 所有选中的模块可根据自己要求，决定是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets；
+> 注：请认真查看config.gradle中的变量备注
+
+## 2019-10-28
+1.修改http适配文件，适配9.0系统，方便体验。
+
 
 ## 2019-10-28
 1.修改http适配文件，适配9.0系统，方便体验。
