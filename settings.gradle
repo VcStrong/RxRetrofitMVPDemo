@@ -1,1 +1,3 @@
 include ':app', ':common', ':open_login', ':open_main'
+include ':open_im'
+include ':open_push'

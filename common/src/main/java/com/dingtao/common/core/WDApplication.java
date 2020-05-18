@@ -61,9 +61,32 @@ public class WDApplication extends Application {
         ARouter.init(this);//阿里路由初始化
 
         Fresco.initialize(this,getConfigureCaches(this));//图片加载框架初始化
-        //定位
-        //推送
-        //统计
+
+        //IM或者推送等服务的appliation初始化
+        loadModuleApp();
+    }
+
+    /**
+     * 加载各个模块的Application，例如：推送和IM等模块都需要有Application，
+     * 但组件化只能有一个Application，而且为了解耦各个模块不能互相引用，
+     * 所以只能通过反射方式，把这些module_appliation进行初始化
+     */
+    private void loadModuleApp(){
+        for (String moduleImpl : IWDApplication.MODULE_APP){
+            try {
+                Class<?> clazz = Class.forName(moduleImpl);
+                Object obj = clazz.newInstance();
+                if (obj instanceof IWDApplication){
+                    ((IWDApplication) obj).onCreate(this);
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
