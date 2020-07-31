@@ -7,6 +7,9 @@
 
 kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 
+> 注册的密码规则是数字加字母超过8位即可
+> 测试账号：13126965106 密码：111111aa
+
 ## 1.mvp-V1
 mvp乞丐版已知bug：请求异常会崩溃
 

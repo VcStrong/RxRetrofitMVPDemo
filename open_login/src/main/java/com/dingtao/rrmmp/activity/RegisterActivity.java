@@ -64,7 +64,7 @@ public class RegisterActivity extends WDActivity {
             return;
         }
         mLoadDialog.show();
-        requestPresenter.reqeust(m, MD5Utils.md5(p));
+        requestPresenter.reqeust(m, p);
     }
 
     private boolean pasVisibile = false;

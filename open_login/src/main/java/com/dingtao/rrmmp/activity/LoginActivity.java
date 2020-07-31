@@ -88,7 +88,7 @@ public class LoginActivity extends WDActivity {
                     .putString("pas", p).commit();
         }
         mLoadDialog.show();
-        requestPresenter.reqeust(m, MD5Utils.md5(p));
+        requestPresenter.reqeust(m, p);
     }
 
     /**

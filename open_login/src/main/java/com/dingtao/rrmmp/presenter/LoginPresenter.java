@@ -2,8 +2,10 @@ package com.dingtao.rrmmp.presenter;
 import com.dingtao.common.core.WDPresenter;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.http.IAppRequest;
+import com.dingtao.common.core.http.NetworkManager;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 
 /**
  * @author dingtao
@@ -18,7 +20,8 @@ public class LoginPresenter extends WDPresenter<IAppRequest> {
 
     @Override
     protected Observable getModel(Object... args) {
-        return iRequest.login((String)args[0],(String)args[1]);
+        RequestBody body = NetworkManager.convertJsonBody(new String[]{"phone","pwd"},new String[]{(String)args[0],(String)args[1]});
+        return iRequest.login(body);
     }
 
 

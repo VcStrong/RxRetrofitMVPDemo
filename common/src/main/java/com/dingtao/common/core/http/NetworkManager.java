@@ -5,14 +5,20 @@ import com.dingtao.common.core.WDApplication;
 import com.dingtao.common.core.WDPresenter;
 import com.dingtao.common.core.db.DaoMaster;
 import com.dingtao.common.core.db.UserInfoDao;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -26,7 +32,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkManager {
 
+    private static Gson gson = new Gson();
     private static NetworkManager instance;
+
+    //这个是模仿应用多模块采用不同的域名
     private Retrofit app_retrofit,baidu_retrofit;
 
     private NetworkManager(){
@@ -88,6 +97,40 @@ public class NetworkManager {
             return baidu_retrofit.create(service);
         }
         return app_retrofit.create(service);
+    }
+
+    /**
+     * 把传递数据转为json格式，返回RequestBody
+     *
+     * @param keys   请求参数
+     * @param values 数据
+     * @return
+     */
+    public static RequestBody convertJsonBody(String[] keys, Object[] values) {
+        JSONObject json = new JSONObject();
+
+        for (int i = 0; i < keys.length; i++) {
+            String key = keys[i];
+            Object value = values[i];
+            try {//减小数据中某一项对于所有数据的影响
+                json.put(key, value);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json.toString());
+        return  body;
+    }
+
+    /**
+     * 把传递数据转为json格式，返回RequestBody
+     *
+     * @param obj 数据
+     * @return
+     */
+    public static RequestBody convertJsonBody(Object obj) {
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), gson.toJson(obj));
+        return  body;
     }
 
 }
